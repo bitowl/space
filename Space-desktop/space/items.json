@@ -1,0 +1,64 @@
+{
+"items": [
+	{
+		"type": "none",
+		"frequency": 0
+	},
+	{
+		"type": "money",
+		"amount": 1,
+		"image": "item_coin",
+		"frequency": 20
+	},
+	{
+		"type": "money",
+		"amount": 5,
+		"image": "item_coin",
+		"frequency": 10
+	},
+	{
+		"type": "money",
+		"amount": 20,
+		"image": "item_coin",
+		"frequency": 5
+	},
+	
+	
+	{
+		"type": "ammo",
+		"weapon": "machine gun",
+		"amount": 100,
+		"image": "item_mg",
+		"frequency": 2
+	},
+	{
+		"type": "ammo",
+		"weapon": "rocket launcher",
+		"amount": 5,
+		"image": "item_rocket",
+		"frequency": 3
+	},
+	{
+		"type": "ammo",
+		"weapon": "zapper",
+		"amount": 200,
+		"image": "item_zap",
+		"frequency": 1
+	},
+	{
+		"type": "ammo",
+		"weapon": "plasma",
+		"amount": 10,
+		"image": "item_plasma",
+		"frequency": 3
+	},
+	
+	{
+		"type": "life",
+		"amount": 10,
+		"image": "item_life",
+		"frequency": 10
+	}
+	
+]
+}

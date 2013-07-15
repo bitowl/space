@@ -1,0 +1,139 @@
+{
+"weapons": [
+	{
+		"name": "gun",
+		"upgrades": [
+			{
+				"shipimage": null,
+				"maxAmmo": -1,
+				"autoShootDelay": 0.2,
+				"manualDelay": 0.1,
+				"shots": [
+					{
+						"angle": 0,
+						"type": 0,
+						"speed": 800,
+						"strength": 1,
+						"image": "shot"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "machine gun",
+		"upgrades": [
+			{
+				"shipimage": null,
+				"maxAmmo": 1000,
+				"autoShootDelay": 0.1,
+				"manualDelay": 0.1,
+				"shots": [
+					{
+						"angle": -0.3,
+						"type": 0,
+						"speed": 800,
+						"strength": 0.5,
+						"image": "shot"
+					},
+					{
+						"angle": 0.3,
+						"type": 0,
+						"speed": 800,
+						"strength": 0.5,
+						"image": "shot"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "rocket launcher",
+		"upgrades": [
+			{
+				"shipimage": null,
+				"maxAmmo": 30,
+				"autoShootDelay": 0.7,
+				"manualDelay": 0.5,
+				"shots": [
+					{
+						"angle": 0,
+						"type": 1,
+						"speed": 700,
+						"strength": 4,
+						"image": "rocket",
+						"animTime": 0.3,
+						"maxAccAngle": 3
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "zapper",
+		"upgrades": [
+			{
+				"shipimage": null,
+				"maxAmmo": 500,
+				"autoShootDelay": 0.2,
+				"manualDelay": 0.1,
+				"shots": [
+					{
+						"angle": 0,
+						"type": 0,
+						"speed": 1200,
+						"strength": 3,
+						"image": "zap",
+						"animTime": 0.04
+					}
+				]
+			}
+		]
+	},							
+	{
+		"name": "plasma",
+		"upgrades": [
+			{
+				"shipimage": null,
+				"maxAmmo": 500,
+				"autoShootDelay": 1.5,
+				"manualDelay": 0.9,
+				"shots": [
+					{
+						"angle": 0,
+						"type": 2,
+						"speed": -200,
+						"strength": 5,
+						"image": "plasma",
+						"explosionRadius": 300
+					},
+					
+				]
+			}
+		]
+	},
+	
+	{
+		"name": "cheater",
+		"upgrades": [
+			{
+				"shipimage": null,
+				"maxAmmo": -1,
+				"autoShootDelay": 0.0,
+				"manualDelay": 0.0,
+				"shots": [
+					{
+						"angle": 0,
+						"type": 1,
+						"speed": 3000,
+						"strength": 4,
+						"image": "rocket",
+						"animTime": 0.3,
+						"maxAccAngle": 200
+					}
+				]
+			}
+		]
+	},
+]
+}

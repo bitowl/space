@@ -1,0 +1,62 @@
+{
+"enemies": [
+	{
+		"name": "green default guy",
+		"image": "enemy",
+		"animTime": 0.1,
+		"maxSpeed": 200,
+		"accSpeed": 50,
+		"maxAccAngle": 3,
+		"life": 1,
+		"strength": 1,
+		"frequency": 10
+	},
+	{
+		"name": "skull",
+		"image": "skull",
+		"animTime": 0.1,
+		"maxSpeed": 100,
+		"accSpeed": 50,
+		"maxAccAngle": 1,
+		"life": 2,
+		"strength": 1,
+		"frequency": 4,
+		"weapon": {
+			"shipimage": null,
+			"maxAmmo": -1,
+			"autoShootDelay": 0.2,
+			"manualDelay": 0.1,
+			"shots": [
+				{
+					"angle": 0,
+					"type": 0,
+					"speed": 800,
+					"strength": 1,
+					"image": "shot"
+				}
+			]
+		}
+	},
+	{
+		"name": "quadratic enemy",
+		"image": "quadenem",
+		"maxSpeed": 150,
+		"accSpeed": 50,
+		"maxAccAngle": 0.3,
+		"life": 20,
+		"strength": 10,
+		"frequency": 2000
+	},
+	{
+		"name": "ghost",
+		"image": "ghost",
+		"animTime": 0.1,
+		"maxSpeed": 200,
+		"accSpeed": 90,
+		"maxAccAngle": 8,
+		"life": 7,
+		"strength": 5,
+		"frequency": 7
+	}
+]
+}
