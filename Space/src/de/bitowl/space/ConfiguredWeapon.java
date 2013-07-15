@@ -18,6 +18,7 @@ import de.bitowl.space.objects.SteeredShot;
 public class ConfiguredWeapon extends Weapon{
 	Array<ConfiguredShot> shots;
 	
+	@SuppressWarnings("unchecked")
 	public ConfiguredWeapon(OrderedMap<String, Object> config) {
 		System.out.println(config);
 		// read the configuration

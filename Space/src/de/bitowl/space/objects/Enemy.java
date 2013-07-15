@@ -2,7 +2,6 @@ package de.bitowl.space.objects;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
 
 import de.bitowl.space.Chunk;
 import de.bitowl.space.Resources;

@@ -2,13 +2,11 @@ package de.bitowl.space.objects;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import de.bitowl.space.AnimAction;
 import de.bitowl.space.ConfiguredWeapon;
 import de.bitowl.space.Resources;
-import de.bitowl.space.Weapon;
 
 public class ConfiguredEnemy {
 	public String name;
@@ -22,6 +20,7 @@ public class ConfiguredEnemy {
 	ConfiguredWeapon weapon;
 	public float frequency;
 	
+	@SuppressWarnings("unchecked")
 	public ConfiguredEnemy(OrderedMap<String, Object> config) {
 		name=(String) config.get("name");
 		image=(String) config.get("image");

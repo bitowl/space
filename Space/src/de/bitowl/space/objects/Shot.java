@@ -1,12 +1,10 @@
 package de.bitowl.space.objects;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 import de.bitowl.space.Chunk;
-import de.bitowl.space.Resources;
 
 public class Shot extends GameObject{
 	float angle;

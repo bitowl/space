@@ -16,6 +16,7 @@ import de.bitowl.space.objects.GameObjects;
  *
  */
 public class ConfigReader {
+	@SuppressWarnings("unchecked")
 	public static void initGameValues(){
 		
 		JsonReader reader=new JsonReader();
