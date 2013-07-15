@@ -223,8 +223,8 @@ public class IngameScreen extends AbstractScreen{
 	
 		// draw control-visuals
 		if(psX!=-1){
-			batch.draw(point_start, psX+camera.position.x-32,psY+camera.position.y-32);
-			batch.draw(point_end, peX+camera.position.x-16,peY+camera.position.y-16);
+			batch.draw(point_start, psX*camera.zoom+camera.position.x-32,psY*camera.zoom+camera.position.y-32);
+			batch.draw(point_end, peX*camera.zoom+camera.position.x-16,peY*camera.zoom+camera.position.y-16);
 		}
 		
 		
