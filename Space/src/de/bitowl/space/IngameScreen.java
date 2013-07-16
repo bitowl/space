@@ -10,6 +10,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -145,7 +147,7 @@ public class IngameScreen extends AbstractScreen{
 	public void render(float delta) {
 		super.render(delta);
 		
-		
+		camera.zoom=normZoom;
 		
 		avaiableToLandOnThisFrame=null;
 		if(player.life<=0){
@@ -194,7 +196,7 @@ public class IngameScreen extends AbstractScreen{
 		// scrolling
 		camera.position.x=player.getX()+player.getOriginX();
 		camera.position.y=player.getY()+player.getOriginY();
-		camera.zoom=normZoom;
+		
 		camera.update();
 		camera.activate(batch);
 		cameraRect.set(camera.position.x-camera.getWidth()/2, camera.position.y-camera.getHeight()/2, camera.getWidth(), camera.getHeight());
@@ -209,6 +211,10 @@ public class IngameScreen extends AbstractScreen{
 			if(chunks.get(i).rect.overlaps(cameraRect)){
 				// this chunk is in the visible drawarea
 				chunks.get(i).draw(cameraRect,batch);
+				
+				
+				//// DEBUG
+				Resources.font.draw(batch, "chunk "+i, chunks.get(i).x,chunks.get(i).y);
 			}
 		}
 
@@ -228,6 +234,26 @@ public class IngameScreen extends AbstractScreen{
 			marker.get(i).draw(cameraRect, batch);
 		}
 		batch.end();
+		
+		
+
+		
+		///// DEBUG RENDERER /////
+		ShapeRenderer renderer=new ShapeRenderer();
+		renderer.begin(ShapeType.Rectangle);
+		renderer.setProjectionMatrix(camera.combined);
+		renderer.setColor(255,0,0,10);
+		for(int i=0;i<chunks.size();i++){
+			if(chunks.get(i).rect.overlaps(cameraRect)){
+				renderer.rect(chunks.get(i).x, chunks.get(i).y, chunks.get(i).width, chunks.get(i).height);		
+			}
+		}
+		renderer.end();
+		
+		
+		
+		///// HUD //////
+		
 		camera.position.x=0;
 		camera.position.y=0;
 		camera.zoom=guiZoom;
@@ -264,6 +290,9 @@ public class IngameScreen extends AbstractScreen{
 		
 		
 		batch.end();
+		
+		
+		
 	}
 	
 	
@@ -289,7 +318,10 @@ public class IngameScreen extends AbstractScreen{
 	
 	private void checkChunks(){
 		// do we need to add a new chunk?
-		if(getChunk(player.getX()-camera.getWidth()/2,player.getY()-camera.getHeight()/2)==null){
+		// TODO do not always go through all chunks to see if this particular one is there
+		//      but link them (maybe in all four directions)
+		System.out.println("+++"+camera.getWidth());
+		/*if(getChunk(player.getX()-camera.getWidth()/2,player.getY()-camera.getHeight()/2)==null){
 			addChunkFor(player.getX()-camera.getWidth()/2,player.getY()-camera.getHeight()/2);
 		}
 		if(getChunk(player.getX()-camera.getWidth()/2,player.getY()+camera.getHeight()/2)==null){
@@ -300,7 +332,20 @@ public class IngameScreen extends AbstractScreen{
 		}
 		if(getChunk(player.getX()+camera.getWidth()/2,player.getY()+camera.getHeight()/2)==null){
 			addChunkFor(player.getX()+camera.getWidth()/2,player.getY()+camera.getHeight()/2);
+		}*/
+		
+		// check all chunks
+		System.out.println( (player.getY()-camera.getHeight()/2) +" -> "+ (player.getY()+camera.getHeight()/2 ));
+		for(float y=player.getY()-camera.getHeight()/2;y<player.getY()+camera.getHeight()/2;y+=Chunk.height){
+			for(float x=player.getX()-camera.getWidth()/2;x<player.getX()+camera.getWidth()/2;x+=Chunk.width){
+				System.out.println(x+"..."+y);
+				if(getChunk(x,y)==null){
+					addChunkFor(x,y);
+				}
+			}
 		}
+		
+		
 		// can we remove an old chunk?
 		for(int i=0;i<chunks.size();i++){
 			chunks.get(i);

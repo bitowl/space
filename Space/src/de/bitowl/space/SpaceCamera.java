@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * a simple OrthographicCamera for this SpaceGame
  * just resizes to the screen size
- * TODO add some option to zoom in
  * 
  * @author bitowl
  *
