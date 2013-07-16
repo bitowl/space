@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-import de.bitowl.space.Chunk;
 
 public class Shot extends GameObject{
 	float angle;

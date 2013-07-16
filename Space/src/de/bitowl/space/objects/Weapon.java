@@ -1,6 +1,5 @@
-package de.bitowl.space;
+package de.bitowl.space.objects;
 
-import de.bitowl.space.objects.GameObject;
 
 
 public abstract class Weapon {

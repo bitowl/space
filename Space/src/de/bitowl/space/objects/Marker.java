@@ -1,11 +1,11 @@
-package de.bitowl.space;
+package de.bitowl.space.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-import de.bitowl.space.objects.GameObject;
+import de.bitowl.space.Resources;
 
 /**
  * points to a certain point on the map

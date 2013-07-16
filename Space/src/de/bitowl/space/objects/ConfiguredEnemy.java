@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import de.bitowl.space.AnimAction;
-import de.bitowl.space.ConfiguredWeapon;
 import de.bitowl.space.Resources;
 
 public class ConfiguredEnemy {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
-import de.bitowl.space.Chunk;
 /**
  * a shot that explodes if it hits anything
  * 

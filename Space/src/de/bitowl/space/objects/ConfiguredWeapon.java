@@ -1,13 +1,10 @@
-package de.bitowl.space;
+package de.bitowl.space.objects;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.OrderedMap;
 
-import de.bitowl.space.objects.ConfiguredShot;
+import de.bitowl.space.Resources;
 import de.bitowl.space.objects.ConfiguredShot.Type;
-import de.bitowl.space.objects.GameObject;
-import de.bitowl.space.objects.Shot;
-import de.bitowl.space.objects.SteeredShot;
 
 /**
  * a weapon that is configured via a config-file

@@ -7,7 +7,9 @@ import com.badlogic.gdx.utils.OrderedMap;
 
 import de.bitowl.space.objects.ConfiguredEnemy;
 import de.bitowl.space.objects.ConfiguredItem;
+import de.bitowl.space.objects.ConfiguredWeapon;
 import de.bitowl.space.objects.GameObjects;
+import de.bitowl.space.objects.Weapon;
 
 /**
  * reads configurations for enemies and weapons

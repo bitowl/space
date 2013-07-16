@@ -2,8 +2,6 @@ package de.bitowl.space.objects;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
-import de.bitowl.space.Chunk;
-import de.bitowl.space.Weapon;
 
 public class Item extends GameObject {
 	enum Type{

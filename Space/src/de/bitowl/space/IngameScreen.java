@@ -17,10 +17,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
+import de.bitowl.space.objects.Chunk;
 import de.bitowl.space.objects.ConfiguredEnemy;
 import de.bitowl.space.objects.ConfiguredItem;
 import de.bitowl.space.objects.GameObjects;
 import de.bitowl.space.objects.Item;
+import de.bitowl.space.objects.Marker;
 import de.bitowl.space.objects.Planet;
 import de.bitowl.space.objects.Player;
 import de.bitowl.space.objects.Ship;
@@ -249,7 +251,7 @@ public class IngameScreen extends AbstractScreen{
 		renderer.setColor(255,0,0,10);
 		for(int i=0;i<chunks.size();i++){
 			if(chunks.get(i).rect.overlaps(cameraRect)){
-				renderer.rect(chunks.get(i).x, chunks.get(i).y, chunks.get(i).width, chunks.get(i).height);		
+				renderer.rect(chunks.get(i).x, chunks.get(i).y, Chunk.width, Chunk.height);		
 			}
 		}
 		
@@ -477,7 +479,7 @@ public class IngameScreen extends AbstractScreen{
 
 		@Override
 		public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-			if(pointer==0){
+			if(pointer == 0){
 				player.accSpeed=-600;
 			
 				psX=-1;// do not show the visuals anymore

@@ -3,7 +3,6 @@ package de.bitowl.space.objects;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
 import de.bitowl.space.AnimAction;
-import de.bitowl.space.Chunk;
 import de.bitowl.space.Resources;
 
 /**

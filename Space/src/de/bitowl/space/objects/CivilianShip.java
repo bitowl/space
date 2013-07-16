@@ -1,6 +1,5 @@
 package de.bitowl.space.objects;
 
-import de.bitowl.space.Chunk;
 import de.bitowl.space.Resources;
 
 public class CivilianShip extends Enemy {

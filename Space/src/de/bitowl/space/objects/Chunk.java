@@ -1,4 +1,4 @@
-package de.bitowl.space;
+package de.bitowl.space.objects;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,24 +6,18 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-import de.bitowl.space.objects.Explosion;
-import de.bitowl.space.objects.GameObject;
-import de.bitowl.space.objects.GameObjects;
-import de.bitowl.space.objects.Item;
-import de.bitowl.space.objects.Planet;
-import de.bitowl.space.objects.Ship;
-import de.bitowl.space.objects.Shot;
-import de.bitowl.space.objects.Star;
+import de.bitowl.space.Resources;
+import de.bitowl.space.Utils;
 
 /**
- * a chunk is a 1000x1000 part of the world
+ * a chunk is a 4000x4000 part of the world
  * 
  * @author bitowl
  *
  */
 public class Chunk {
-	int x;
-	int y;
+	public int x;
+	public int y;
 	public static int width=4000;
 	public static int height=4000;
 	Random random;

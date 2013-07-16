@@ -3,7 +3,6 @@ package de.bitowl.space.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
-import de.bitowl.space.Chunk;
 import de.bitowl.space.Resources;
 
 public class Planet extends Item{

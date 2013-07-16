@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
 
-import de.bitowl.space.Chunk;
 import de.bitowl.space.Resources;
 import de.bitowl.space.Utils;
 

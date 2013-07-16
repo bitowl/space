@@ -4,9 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-import de.bitowl.space.Chunk;
 import de.bitowl.space.Resources;
-import de.bitowl.space.Weapon;
 
 public class Player extends Ship{
 	/**

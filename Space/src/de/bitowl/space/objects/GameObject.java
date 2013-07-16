@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-import de.bitowl.space.Chunk;
 
 /**
  * any object that can move on the screen
