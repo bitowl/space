@@ -148,6 +148,10 @@ public class IngameScreen extends AbstractScreen{
 		super.render(delta);
 		
 		camera.zoom=normZoom;
+
+		// TODO only calculate one? do not reset position of the cam when drawing hud? use different cam?
+		camera.position.x=player.getX()+player.getOriginX();
+		camera.position.y=player.getY()+player.getOriginY();
 		
 		avaiableToLandOnThisFrame=null;
 		if(player.life<=0){
@@ -214,7 +218,7 @@ public class IngameScreen extends AbstractScreen{
 				
 				
 				//// DEBUG
-				Resources.font.draw(batch, "chunk "+i, chunks.get(i).x,chunks.get(i).y);
+				Resources.font.draw(batch, "chunk "+i, chunks.get(i).x,chunks.get(i).y+40);
 			}
 		}
 
@@ -246,6 +250,24 @@ public class IngameScreen extends AbstractScreen{
 		for(int i=0;i<chunks.size();i++){
 			if(chunks.get(i).rect.overlaps(cameraRect)){
 				renderer.rect(chunks.get(i).x, chunks.get(i).y, chunks.get(i).width, chunks.get(i).height);		
+			}
+		}
+		
+		renderer.setColor(0,255,0,10);
+		renderer.rect(camera.position.x-camera.getWidth()/2  +1 , camera.position.y-camera.getHeight()/2 +1, camera.getWidth()-2, camera.getHeight()-2);
+		//for(float y=player.getY()-camera.getHeight()/2;y<player.getY()+camera.getHeight()/2;y+=Chunk.height){
+		//	for(float x=player.getX()-camera.getWidth()/2;x<player.getX()+camera.getWidth()/2;x+=Chunk.width){
+
+		
+		renderer.setColor(0,0,255,10);
+		for(float y=camera.position.y-camera.getHeight()/2 - Chunk.height ;y<camera.position.y+camera.getHeight()/2 +Chunk.height;y+=Chunk.height){
+			for(float x=camera.position.x-camera.getWidth()/2 - Chunk.width ;x<camera.position.x+camera.getWidth()/2 +Chunk.width;x+=Chunk.width){
+				if(getChunk(x, y)==null){
+					renderer.setColor(0,0,255,10);			
+				}else{
+					renderer.setColor(0,0,0,10);
+				}
+				renderer.rect(x,y,Chunk.width,Chunk.height);
 			}
 		}
 		renderer.end();
@@ -320,7 +342,6 @@ public class IngameScreen extends AbstractScreen{
 		// do we need to add a new chunk?
 		// TODO do not always go through all chunks to see if this particular one is there
 		//      but link them (maybe in all four directions)
-		System.out.println("+++"+camera.getWidth());
 		/*if(getChunk(player.getX()-camera.getWidth()/2,player.getY()-camera.getHeight()/2)==null){
 			addChunkFor(player.getX()-camera.getWidth()/2,player.getY()-camera.getHeight()/2);
 		}
@@ -335,19 +356,24 @@ public class IngameScreen extends AbstractScreen{
 		}*/
 		
 		// check all chunks
-		System.out.println( (player.getY()-camera.getHeight()/2) +" -> "+ (player.getY()+camera.getHeight()/2 ));
-		for(float y=player.getY()-camera.getHeight()/2;y<player.getY()+camera.getHeight()/2;y+=Chunk.height){
-			for(float x=player.getX()-camera.getWidth()/2;x<player.getX()+camera.getWidth()/2;x+=Chunk.width){
-				System.out.println(x+"..."+y);
+		//System.out.println( (player.getY()-camera.getHeight()/2) +" -> "+ (player.getY()+camera.getHeight()/2 ));
+		
+		int i=0;
+		for(float y=camera.position.y-camera.getHeight()/2 - Chunk.height ;y<camera.position.y+camera.getHeight()/2 +Chunk.height;y+=Chunk.height){
+			for(float x=camera.position.x-camera.getWidth()/2 - Chunk.width ;x<camera.position.x+camera.getWidth()/2 +Chunk.width;x+=Chunk.width){
+				//System.out.println(x+"..."+y);
+				i++;
 				if(getChunk(x,y)==null){
+					System.err.println("------------------");
 					addChunkFor(x,y);
 				}
 			}
 		}
+		System.out.println(i+" Chunks checked.");
 		
 		
 		// can we remove an old chunk?
-		for(int i=0;i<chunks.size();i++){
+		/*for(int i=0;i<chunks.size();i++){
 			chunks.get(i);
 			chunks.get(i);
 			if(Utils.distance(chunks.get(i).x+Chunk.width/2, chunks.get(i).y+Chunk.height/2, player.getCenterX(),player.getCenterY())>10000){
@@ -355,7 +381,7 @@ public class IngameScreen extends AbstractScreen{
 				i--;
 				System.err.println("remove Chunk");
 			}
-		}
+		}*/
 	}
 	/**
 	 * adds chunk that covers the given point
@@ -510,9 +536,9 @@ public class IngameScreen extends AbstractScreen{
 			
 			
 			else if(keycode==Keys.PLUS || keycode==Keys.VOLUME_UP){
-				normZoom-=0.1f;
+				normZoom-=0.5f;
 			}else if(keycode==Keys.MINUS || keycode==Keys.VOLUME_DOWN){
-				normZoom+=0.1f;
+				normZoom+=0.5f;
 			}
 			return false;
 		}
