@@ -1,5 +1,8 @@
 package de.bitowl.space;
 
+import java.util.prefs.PreferenceChangeEvent;
+
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
@@ -14,4 +17,6 @@ public class Resources {
 	public static IngameScreen ingame;
 	public static BitmapFont font;
 	public static BitmapFont smallfont;
+	
+	public static Preferences preferences; // TODO build own preferences system based on JSON and saved in the application directory instead of the home folder
 }

@@ -18,6 +18,11 @@ public class SplashScreen extends AbstractScreen {
 	Texture bitowl;
 	public SplashScreen(SpaceGame pGame) {
 		super(pGame);
+		
+		// load preferences
+		Resources.preferences=Gdx.app.getPreferences("space");
+		
+		
 		// load texture for splash screen
 		bitowl=new Texture("textures/bitowl.png");
 		

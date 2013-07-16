@@ -90,7 +90,7 @@ public class IngameScreen extends AbstractScreen{
 	Rectangle cameraRect;
 	
 	
-	float normZoom=1;
+	float gameZoom=1;
 	float guiZoom=1;
 	
 	
@@ -120,7 +120,9 @@ public class IngameScreen extends AbstractScreen{
 		GameInputProcessor inputProcessor=new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 		
-		camera.zoom=1f; // TODO save the camera zoom in options
+		// get preferences
+		gameZoom=Resources.preferences.getFloat("gameZoom",1f);
+		
 		cameraRect=new Rectangle();
 		
 		// get textures
@@ -149,7 +151,7 @@ public class IngameScreen extends AbstractScreen{
 	public void render(float delta) {
 		super.render(delta);
 		
-		camera.zoom=normZoom;
+		camera.zoom=gameZoom;
 
 		// TODO only calculate one? do not reset position of the cam when drawing hud? use different cam?
 		camera.position.x=player.getX()+player.getOriginX();
@@ -538,9 +540,13 @@ public class IngameScreen extends AbstractScreen{
 			
 			
 			else if(keycode==Keys.PLUS || keycode==Keys.VOLUME_UP){
-				normZoom-=0.5f;
+				gameZoom-=0.5f;
+				Resources.preferences.putFloat("gameZoom", gameZoom);
+				Resources.preferences.flush(); // TODO only flush once, when ingame/options screen is finished?
 			}else if(keycode==Keys.MINUS || keycode==Keys.VOLUME_DOWN){
-				normZoom+=0.5f;
+				gameZoom+=0.5f;
+				Resources.preferences.putFloat("gameZoom", gameZoom);
+				Resources.preferences.flush(); // TODO only flush once, when ingame/options screen is finished?
 			}
 			return false;
 		}
