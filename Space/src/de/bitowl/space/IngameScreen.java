@@ -112,23 +112,19 @@ public class IngameScreen extends AbstractScreen{
 		player.setX(-player.getWidth()/2);player.setY(-player.getHeight()/2);
 		player.setRotation(-90);
 		
-
-		
-		point_start=Resources.atlas.findRegion("point_start");
-		point_end=Resources.atlas.findRegion("point_end");
-		
 		
 		GameInputProcessor inputProcessor=new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 		
-		camera.zoom=1f; // TODO let the user adjust the camera zoom?
+		camera.zoom=1f; // TODO save the camera zoom in options
 		cameraRect=new Rectangle();
 		
+		// get textures
+		point_start=Resources.atlas.findRegion("point_start");
+		point_end=Resources.atlas.findRegion("point_end");
 		background=Resources.atlas.findRegion("background");
-		
 		lifeborder=Resources.atlas.findRegion("life_border");
 		lifefill=Resources.atlas.findRegion("life_fill");
-		
 		switchWeapons=Resources.atlas.findRegion("switchWeapons");
 		
 		
@@ -390,13 +386,13 @@ public class IngameScreen extends AbstractScreen{
 			}else{ // the second finger makes our ship shoot
 				//player.shoot();
 				player.isShooting=true;
-				return false;
+				//return false;
 			}
 			
 			// we want to be able to shoot while moving
 			if(touchPos.y-camera.position.y<-camera.getHeight()/2+64&&touchPos.x-camera.position.x>camera.getWidth()/2-64){
 				if(avaiableToLandOnThisFrame!=null){
-					game.setScreen(new GameOverScreen(game));
+					//game.setScreen(new GameOverScreen(game));
 				}else{
 					player.switchWeapon();
 				}
@@ -411,7 +407,6 @@ public class IngameScreen extends AbstractScreen{
 		@Override
 		public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 			if(pointer==0){
-				//player.speed=0;
 				player.accSpeed=-600;
 			
 				psX=-1;// do not show the visuals anymore
