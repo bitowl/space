@@ -53,7 +53,6 @@ public abstract class Ship extends GameObject{
 	
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		// TODO Auto-generated method stub
 		super.draw(batch, parentAlpha);
 		if(aim!=null&&aim instanceof Ship){
 			Resources.smallfont.draw(batch,team+"->"+((Ship)aim).team+" "+life,getX(),getY());

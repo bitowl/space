@@ -13,8 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
  *
  */
 public class GameObject extends Image{
+	Rectangle borders;
 	public GameObject(AtlasRegion findRegion) {
 		super(findRegion);
+		borders=new Rectangle();
 	}
 
 	/**
@@ -33,7 +35,7 @@ public class GameObject extends Image{
 	}
 
 	public Rectangle getRectangle(){
-		// TODO make one rectangle and update it
-		return new Rectangle(getX(), getY(), getWidth(), getHeight());
+		borders.set(getX(), getY(), getWidth(), getHeight());
+		return borders;
 	}
 }

@@ -1,6 +1,5 @@
 package de.bitowl.space;
 
-import java.util.prefs.PreferenceChangeEvent;
 
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

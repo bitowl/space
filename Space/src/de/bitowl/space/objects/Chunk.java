@@ -146,7 +146,7 @@ public class Chunk {
 				objects.get(i).draw(batch, 1);
 			}
 		}
-		// draw all ships TODO only visible :)
+		// draw only visible ships, shots and items
 		for(int i=0;i<ships.size();i++){
 			if(ships.get(i).getRectangle().overlaps(rect)){
 				ships.get(i).draw(batch,1);
@@ -209,8 +209,8 @@ public class Chunk {
 	public ArrayList<Ship> getShipsInRadius(float centerX, float centerY, float radius) {
 		ArrayList<Ship> nearShips=new ArrayList<Ship>();
 		for(int i=0;i<ships.size();i++){
-			// TODO use distance ^2
-			if(Utils.distance(ships.get(i).getCenterX(),ships.get(i).getCenterY() , centerX, centerY)<radius){
+			// use distance ^2 as it is faster
+			if(Utils.distanceSq(ships.get(i).getCenterX(),ships.get(i).getCenterY() , centerX, centerY)<radius*radius){
 				nearShips.add(ships.get(i));
 			}
 		}
