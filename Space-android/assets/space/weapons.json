@@ -25,7 +25,7 @@
 		"upgrades": [
 			{
 				"shipimage": null,
-				"maxAmmo": 1000,
+				"maxAmmo": 500,
 				"autoShootDelay": 0.1,
 				"manualDelay": 0.1,
 				"shots": [

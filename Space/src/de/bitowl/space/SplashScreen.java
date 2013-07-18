@@ -38,7 +38,20 @@ public class SplashScreen extends AbstractScreen {
 		Resources.font=new BitmapFont(Gdx.files.internal("fonts/karmatic_arcade.fnt"), false);
 		Resources.smallfont=new BitmapFont();
 		
-}
+		
+		// copy "space"-folder files to local space if necessary
+		loadFileToLocal("space/weapons.json");
+		loadFileToLocal("space/items.json");
+		loadFileToLocal("space/enemies.json");
+		
+	}
+	
+	public void loadFileToLocal(String pFile){
+		if(!Gdx.files.local(pFile).exists()){
+			Gdx.files.internal(pFile).copyTo(Gdx.files.local(pFile));
+		}
+	}
+	
 	@Override
 	public void render(float delta) {
 		super.render(delta);

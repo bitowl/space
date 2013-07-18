@@ -45,7 +45,7 @@
 		"maxAccAngle": 0.3,
 		"life": 20,
 		"strength": 10,
-		"frequency": 2000
+		"frequency": 2
 	},
 	{
 		"name": "ghost",
