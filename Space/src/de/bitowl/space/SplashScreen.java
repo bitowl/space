@@ -20,7 +20,7 @@ public class SplashScreen extends AbstractScreen {
 		super(pGame);
 		
 		// load preferences
-		Resources.preferences=Gdx.app.getPreferences("space");
+		Preferences.init();
 		
 		
 		// load texture for splash screen

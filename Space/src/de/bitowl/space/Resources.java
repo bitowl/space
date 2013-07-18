@@ -1,7 +1,6 @@
 package de.bitowl.space;
 
 
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 

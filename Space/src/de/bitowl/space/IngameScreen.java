@@ -121,7 +121,7 @@ public class IngameScreen extends AbstractScreen{
 		Gdx.input.setInputProcessor(inputProcessor);
 		
 		// get preferences
-		gameZoom=Resources.preferences.getFloat("gameZoom",1f);
+		gameZoom=Preferences.getFloat("gameZoom",1f);
 		
 		cameraRect=new Rectangle();
 		
@@ -541,12 +541,12 @@ public class IngameScreen extends AbstractScreen{
 			
 			else if(keycode==Keys.PLUS || keycode==Keys.VOLUME_UP){
 				gameZoom-=0.5f;
-				Resources.preferences.putFloat("gameZoom", gameZoom);
-				Resources.preferences.flush(); // TODO only flush once, when ingame/options screen is finished?
+				Preferences.putFloat("gameZoom", gameZoom);
+				Preferences.flush(); // TODO only flush once, when ingame/options screen is finished?
 			}else if(keycode==Keys.MINUS || keycode==Keys.VOLUME_DOWN){
 				gameZoom+=0.5f;
-				Resources.preferences.putFloat("gameZoom", gameZoom);
-				Resources.preferences.flush(); // TODO only flush once, when ingame/options screen is finished?
+				Preferences.putFloat("gameZoom", gameZoom);
+				Preferences.flush(); // TODO only flush once, when ingame/options screen is finished?
 			}
 			return false;
 		}
