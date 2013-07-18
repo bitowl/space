@@ -33,14 +33,14 @@ public class Preferences {
 	}
 	public static int getInt(String pKey,int pDefault){
 		if(preferences.containsKey(pKey)){
-			return (Integer) preferences.get(pKey);
+			return Integer.parseInt((String) preferences.get(pKey));
 		}else{
 			return pDefault;
 		}
 	}
 	public static float getFloat(String pKey,float pDefault){
 		if(preferences.containsKey(pKey)){
-			return (Float) preferences.get(pKey);
+			return Float.parseFloat((String) preferences.get(pKey));
 		}else{
 			return pDefault;
 		}
@@ -67,14 +67,7 @@ public class Preferences {
 			writer.object();
 			writer.set("test", 5);
 			for(String key : preferences.keySet()){
-				if(preferences.get(key).getClass().equals(Float.class)){
-					writer.set(key, (Float)preferences.get(key));	
-				}else if(preferences.get(key).getClass().equals(Float.class)){
-					writer.set(key, (Integer)preferences.get(key));
-				}else{
-					writer.set(key, preferences.get(key));
-				}
-				
+					writer.set(key, preferences.get(key));			
 			}
 		
 			writer.close();
