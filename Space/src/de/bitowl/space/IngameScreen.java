@@ -222,7 +222,7 @@ public class IngameScreen extends AbstractScreen{
 				
 				
 				//// DEBUG
-				Resources.font.draw(batch, "chunk "+i, chunks.get(i).x,chunks.get(i).y+40);
+				//Resources.font.draw(batch, "chunk "+i, chunks.get(i).x,chunks.get(i).y+40);
 			}
 		}
 
@@ -247,7 +247,7 @@ public class IngameScreen extends AbstractScreen{
 
 		
 		///// DEBUG RENDERER /////
-		ShapeRenderer renderer=new ShapeRenderer();
+	/*	ShapeRenderer renderer=new ShapeRenderer();
 		renderer.begin(ShapeType.Rectangle);
 		renderer.setProjectionMatrix(camera.combined);
 		renderer.setColor(255,0,0,10);
@@ -274,7 +274,7 @@ public class IngameScreen extends AbstractScreen{
 				renderer.rect(x,y,Chunk.width,Chunk.height);
 			}
 		}
-		renderer.end();
+		renderer.end();*/
 		
 		
 		

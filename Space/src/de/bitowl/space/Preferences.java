@@ -26,21 +26,22 @@ public class Preferences {
 	
 	public static String getString(String pKey,String pDefault){
 		if(preferences.containsKey(pKey)){
-			return (String) preferences.get(pKey);
+			return preferences.get(pKey).toString();
 		}else{
 			return pDefault;
 		}
 	}
 	public static int getInt(String pKey,int pDefault){
 		if(preferences.containsKey(pKey)){
-			return Integer.parseInt((String) preferences.get(pKey));
+			return Integer.parseInt(preferences.get(pKey).toString());
 		}else{
 			return pDefault;
 		}
 	}
 	public static float getFloat(String pKey,float pDefault){
+		System.out.println("key: "+pKey+"  value: "+preferences.get(pKey));
 		if(preferences.containsKey(pKey)){
-			return Float.parseFloat((String) preferences.get(pKey));
+			return Float.parseFloat(preferences.get(pKey).toString());
 		}else{
 			return pDefault;
 		}
