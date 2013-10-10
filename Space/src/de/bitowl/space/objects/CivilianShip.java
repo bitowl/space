@@ -1,11 +1,11 @@
 package de.bitowl.space.objects;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 
 public class CivilianShip extends Enemy {
 	Planet home;
 	public CivilianShip() {
-		super(Resources.atlas.findRegion("civilian"));
+		super(Res.atlas.findRegion("civilian"));
 		setOrigin(26, 30);
 		MAX_SPEED=100;
 		ANGLE_ACC_SPEED=3;

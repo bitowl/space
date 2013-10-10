@@ -3,7 +3,7 @@ package de.bitowl.space.objects;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.OrderedMap;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 import de.bitowl.space.objects.ConfiguredShot.Type;
 
 /**
@@ -64,7 +64,7 @@ public class ConfiguredWeapon extends Weapon{
 				((SteeredShot)shot).aim=pAim;
 			}
 			shot.team=pTeam;
-			Resources.ingame.addShot(shot);
+			Res.ingame.addShot(shot);
 		}
 	}
 

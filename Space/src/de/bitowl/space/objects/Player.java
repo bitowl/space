@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 
 public class Player extends Ship{
 	/**
@@ -30,15 +30,15 @@ public class Player extends Ship{
 	public float money;
 	
 	public Player() {
-		super(Resources.atlas.findRegion("ship"));
+		super(Res.atlas.findRegion("ship"));
 		setOrigin(48,48);
 		MAX_SPEED=500;
 		ANGLE_ACC_SPEED=10;
 		GameObjects.player=this;
 		
-		mgA=Resources.atlas.findRegion("ship_doublegun");
-		cockpitA=Resources.atlas.findRegion("ship_cocpit");
-		engineA=Resources.atlas.findRegion("ship_engine");
+		mgA=Res.atlas.findRegion("ship_doublegun");
+		cockpitA=Res.atlas.findRegion("ship_cocpit");
+		engineA=Res.atlas.findRegion("ship_engine");
 		life=max_life;
 		team=0;
 	}

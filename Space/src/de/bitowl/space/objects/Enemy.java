@@ -3,7 +3,7 @@ package de.bitowl.space.objects;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 import de.bitowl.space.Utils;
 
 /**
@@ -48,22 +48,22 @@ public class Enemy extends Ship{
 				item.setY(getCenterY()-item.getHeight()/2);
 				Resources.ingame.addItem(item);
 			}*/
-			float type=MathUtils.random(Resources.ingame.totalItemFrequency);
+			float type=MathUtils.random(Res.ingame.totalItemFrequency);
 			float already=0; // sum up the frequencies
-			for(int i=0;i<Resources.ingame.itemTypes.size;i++){
-				if(already+Resources.ingame.itemTypes.get(i).frequency>type){
-					if(Resources.ingame.itemTypes.get(i).type!=Item.Type.NONE){
-						Resources.ingame.addItem(Resources.ingame.itemTypes.get(i).create(getCenterX(),getCenterY()));
+			for(int i=0;i<Res.ingame.itemTypes.size;i++){
+				if(already+Res.ingame.itemTypes.get(i).frequency>type){
+					if(Res.ingame.itemTypes.get(i).type!=Item.Type.NONE){
+						Res.ingame.addItem(Res.ingame.itemTypes.get(i).create(getCenterX(),getCenterY()));
 					}
 					break;	
 				}
-				already+=Resources.ingame.itemTypes.get(i).frequency;
+				already+=Res.ingame.itemTypes.get(i).frequency;
 			}
 		}
 		
 		if(aim==null||aim.toremove){// we have no aim. Let's search for the next enemy
-			if(Resources.ingame.getChunk(getX(),getY())!=null){
-				aim=Resources.ingame.getChunk(getX(),getY()).getNearestEnemy(team, getX(),getY());
+			if(Res.ingame.getChunk(getX(),getY())!=null){
+				aim=Res.ingame.getChunk(getX(),getY()).getNearestEnemy(team, getX(),getY());
 				accAngle=0;
 			}
 		}

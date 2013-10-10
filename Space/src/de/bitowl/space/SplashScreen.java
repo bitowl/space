@@ -25,18 +25,9 @@ public class SplashScreen extends AbstractScreen {
 		// load texture for splash screen
 		bitowl=new Texture("textures/bitowl.png");
 		
-		// load all textures
-		Resources.atlas=new TextureAtlas(Gdx.files.internal("textures/textures.atlas"));
-		// make the textures smooth
-		Iterator<Texture> iterator=Resources.atlas.getTextures().iterator();
-		while(iterator.hasNext()){
-			iterator.next().setFilter(TextureFilter.Linear,TextureFilter.Linear);
-		}
 		
-		// load font
-		Resources.font=new BitmapFont(Gdx.files.internal("fonts/karmatic_arcade.fnt"), false);
-		Resources.smallfont=new BitmapFont();
 		
+		Res.load();
 		
 		// copy "space"-folder files to local space if necessary
 		loadFileToLocal("space/weapons.json");
@@ -57,6 +48,8 @@ public class SplashScreen extends AbstractScreen {
 		batch.begin();
 		batch.draw(bitowl,Gdx.graphics.getWidth()/2-64,Gdx.graphics.getHeight()/2-64,128,128);
 		batch.end();
-		SpaceGame.screen(new IngameScreen());
+		
+		//SpaceGame.screen(new IngameScreen());
+		SpaceGame.screen(new ShopScreen());
 	}
 }

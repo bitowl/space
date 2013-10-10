@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.MathUtils;
 
 import de.bitowl.space.AnimAction;
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 
 /**
  * configuration for the shots
@@ -30,15 +30,15 @@ public class ConfiguredShot{
 		Shot shot;
 		switch(type){
 			case STEERED:
-				shot=new SteeredShot(Resources.atlas.findRegion(image));
+				shot=new SteeredShot(Res.atlas.findRegion(image));
 				((SteeredShot)shot).ANGLE_ACC_SPEED=maxAccAngle;
 				break;
 			case EXPLOSIVE:
-				shot=new ExplosiveShot(Resources.atlas.findRegion(image));
+				shot=new ExplosiveShot(Res.atlas.findRegion(image));
 				((ExplosiveShot)shot).radius=explosionRadius;
 				break;
 			default:
-				shot=new Shot(Resources.atlas.findRegion(image));
+				shot=new Shot(Res.atlas.findRegion(image));
 			break;
 		}
 		shot.speed=speed;
@@ -47,7 +47,7 @@ public class ConfiguredShot{
 		shot.setY(pY-shot.getOriginY()+MathUtils.sin(pAngle+angle)*48);
 		shot.setAngle(pAngle);
 		if(animTime!=-1){
-			shot.addAction(new AnimAction(new Animation(animTime,Resources.atlas.findRegions(image)),true));
+			shot.addAction(new AnimAction(new Animation(animTime,Res.atlas.findRegions(image)),true));
 		}
 		
 		return shot;

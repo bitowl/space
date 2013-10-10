@@ -6,7 +6,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 import de.bitowl.space.Utils;
 
 /**
@@ -70,7 +70,7 @@ public class Chunk {
 	public void checkRemove(){
 		for(int i=0;i<ships.size();i++){
 			if(!isInChunk(ships.get(i).getX(),ships.get(i).getY())){// this ship is not in this chunk anymore
-				Resources.ingame.addShip(ships.get(i));// add the ship to the right chunk
+				Res.ingame.addShip(ships.get(i));// add the ship to the right chunk
 				ships.remove(i);// remove it from this chunk
 				i--;
 				continue;
@@ -83,7 +83,7 @@ public class Chunk {
 		}
 		for(int i=0;i<shots.size();i++){
 			if(!isInChunk(shots.get(i).getX(),shots.get(i).getY())){// this ship is not in this chunk anymore
-				Resources.ingame.addShot(shots.get(i));// add the ship to the right chunk
+				Res.ingame.addShot(shots.get(i));// add the ship to the right chunk
 				
 				shots.remove(i);// remove it from this chunk
 				i--;
@@ -97,7 +97,7 @@ public class Chunk {
 		}
 		for(int i=0;i<items.size();i++){
 			if(!isInChunk(items.get(i).getX(),items.get(i).getY())){// this ship is not in this chunk anymore
-				Resources.ingame.addItem(items.get(i));// add the ship to the right chunk
+				Res.ingame.addItem(items.get(i));// add the ship to the right chunk
 				
 				items.remove(i);// remove it from this chunk
 				i--;

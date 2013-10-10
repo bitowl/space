@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import de.bitowl.space.AnimAction;
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 
 public class ConfiguredEnemy {
 	public String name;
@@ -34,13 +34,13 @@ public class ConfiguredEnemy {
 			weapon=new ConfiguredWeapon((OrderedMap<String, Object>) config.get("weapon"));
 		}
 		frequency=(Float) config.get("frequency");
-		Resources.ingame.totalEnemyFrequency+=frequency;
+		Res.ingame.totalEnemyFrequency+=frequency;
 	}
 	
 	public Enemy create(float pX,float pY,float pAngle){
-		Enemy enemy=new Enemy(Resources.atlas.findRegion(image));
+		Enemy enemy=new Enemy(Res.atlas.findRegion(image));
 		if(animTime!=-1){
-			enemy.addAction(new AnimAction(new Animation(animTime,Resources.atlas.findRegions(image)),true));
+			enemy.addAction(new AnimAction(new Animation(animTime,Res.atlas.findRegions(image)),true));
 		}
 		
 		enemy.setX(pX-enemy.getOriginX());

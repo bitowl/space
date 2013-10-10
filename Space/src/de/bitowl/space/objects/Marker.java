@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 
 /**
  * points to a certain point on the map
@@ -16,7 +16,7 @@ import de.bitowl.space.Resources;
 public class Marker extends GameObject{
 	int x,y;
 	public Marker(int pX,int pY) {
-		super(Resources.atlas.findRegion("marker"));
+		super(Res.atlas.findRegion("marker"));
 		x=pX;
 		y=pY;
 		setOrigin(16,16);

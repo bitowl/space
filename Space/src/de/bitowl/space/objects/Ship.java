@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.MathUtils;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 import de.bitowl.space.Utils;
 
 public abstract class Ship extends GameObject{
@@ -55,9 +55,9 @@ public abstract class Ship extends GameObject{
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 		if(aim!=null&&aim instanceof Ship){
-			Resources.smallfont.draw(batch,team+"->"+((Ship)aim).team+" "+life,getX(),getY());
+			Res.smallfont.draw(batch,team+"->"+((Ship)aim).team+" "+life,getX(),getY());
 		}else{
-			Resources.smallfont.draw(batch,""+team,getX(),getY());
+			Res.smallfont.draw(batch,""+team,getX(),getY());
 		}
 	}
 	@Override

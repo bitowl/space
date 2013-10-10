@@ -16,7 +16,7 @@ public class GameOverScreen extends AbstractScreen {
 	public void render(float delta) {
 		super.render(delta);
 		batch.begin();
-		Resources.font.drawWrapped(batch, "GAME OVER",0,Gdx.graphics.getHeight()/2+32,Gdx.graphics.getWidth(),HAlignment.CENTER);
+		Res.font.drawWrapped(batch, "GAME OVER",0,Gdx.graphics.getHeight()/2+32,Gdx.graphics.getWidth(),HAlignment.CENTER);
 		batch.end();
 		if(Gdx.input.justTouched()){
 			SpaceGame.screen(new IngameScreen());

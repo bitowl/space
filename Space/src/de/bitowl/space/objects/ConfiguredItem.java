@@ -3,7 +3,7 @@ package de.bitowl.space.objects;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.utils.OrderedMap;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 import de.bitowl.space.objects.Item.Type;
 
 public class ConfiguredItem {
@@ -17,13 +17,13 @@ public class ConfiguredItem {
 		type=getType((String) config.get("type"));
 
 		frequency=(Float) config.get("frequency");
-		Resources.ingame.totalItemFrequency+=frequency;
+		Res.ingame.totalItemFrequency+=frequency;
 		if(type!=Type.NONE){
 			amount=(Float)config.get("amount");
 			if(type==Type.AMMO){
 				weapon=getWeapon(config.get("weapon"));
 			}
-			image=Resources.atlas.findRegion((String) config.get("image"));
+			image=Res.atlas.findRegion((String) config.get("image"));
 		}
 	}
 	

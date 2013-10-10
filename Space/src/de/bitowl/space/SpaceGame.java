@@ -1,6 +1,7 @@
 package de.bitowl.space;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 
 public class SpaceGame extends Game {
 	static SpaceGame game;
@@ -11,12 +12,13 @@ public class SpaceGame extends Game {
 		setScreen(new SplashScreen());
 	}
 	
-	public static void screen(AbstractScreen pScreen){
-		game.setScreen(pScreen);
+	public static void screen(Screen shopScreen){
+		game.getScreen().dispose(); // TODO vllt. alle Screens laden und erst am ende disposen?
+		game.setScreen(shopScreen);
 	}
 	@Override
 	public void dispose() {
 		super.dispose();
-		Resources.dispose();
+		Res.dispose();
 	}
 }

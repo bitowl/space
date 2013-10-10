@@ -3,7 +3,7 @@ package de.bitowl.space.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 
 public class Planet extends Item{
 	
@@ -13,7 +13,7 @@ public class Planet extends Item{
 	int team;
 
 	public Planet(int pX,int pY,int pTeam) {
-		super(Resources.atlas.findRegion("earth")); // does not matter, we're overriding everything
+		super(Res.atlas.findRegion("earth")); // does not matter, we're overriding everything
 		team=pTeam;
 		//((TextureRegionDrawable)getDrawable()).setRegion(Resources.atlas.findRegion("earth"));
 		/*setDrawable(new TextureRegionDrawable());
@@ -31,7 +31,7 @@ public class Planet extends Item{
 	@Override
 	public void collected() {
 		System.out.println("LÄND ON ÖRTH");
-		Resources.ingame.avaiableToLandOnThisFrame=this;// you may land on me :D
+		Res.ingame.avaiableToLandOnThisFrame=this;// you may land on me :D
 		// TODO maybe do not check for this every frame?
 	}
 	
@@ -52,7 +52,7 @@ public class Planet extends Item{
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		Resources.smallfont.draw(batch,""+team,getX(),getY());
+		Res.smallfont.draw(batch,""+team,getX(),getY());
 	}
 	/**
 	 * spawns an enemy on this planet
@@ -82,17 +82,17 @@ public class Planet extends Item{
 		// spawn an enemy at a random position around the player
 		float angle=MathUtils.random(-MathUtils.PI,MathUtils.PI);
 		
-		float type=MathUtils.random(Resources.ingame.totalEnemyFrequency);
+		float type=MathUtils.random(Res.ingame.totalEnemyFrequency);
 		float already=0; // sum up the frequencies
-		for(int i=0;i<Resources.ingame.enemyTypes.size;i++){
-			if(already+Resources.ingame.enemyTypes.get(i).frequency>type){
-				Enemy e1=Resources.ingame.enemyTypes.get(i).create(getCenterX()+MathUtils.cos(angle)*radius, getCenterY()+MathUtils.sin(angle)*radius, angle);
+		for(int i=0;i<Res.ingame.enemyTypes.size;i++){
+			if(already+Res.ingame.enemyTypes.get(i).frequency>type){
+				Enemy e1=Res.ingame.enemyTypes.get(i).create(getCenterX()+MathUtils.cos(angle)*radius, getCenterY()+MathUtils.sin(angle)*radius, angle);
 				e1.team=team; // only out ships will spawn here :D
 				
-				Resources.ingame.addShip(e1);
+				Res.ingame.addShip(e1);
 				break;	
 			}
-			already+=Resources.ingame.enemyTypes.get(i).frequency;
+			already+=Res.ingame.enemyTypes.get(i).frequency;
 		}
 	}
 }

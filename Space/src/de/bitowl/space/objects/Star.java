@@ -1,6 +1,6 @@
 package de.bitowl.space.objects;
 
-import de.bitowl.space.Resources;
+import de.bitowl.space.Res;
 
 /**
  * a simple fix-star
@@ -11,7 +11,7 @@ import de.bitowl.space.Resources;
 public class Star extends GameObject {
 	public Star(int pType,int pX,int pY){
 		// choose a random star image
-		super(Resources.atlas.findRegion("star"+pType));
+		super(Res.atlas.findRegion("star"+pType));
 
 		setX(pX);
 		setY(pY);

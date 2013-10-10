@@ -44,18 +44,18 @@ public class ConfigReader {
 		Object enemVals=reader.parse(Gdx.files.internal("space/enemies.json"));
 		Array<OrderedMap<String, Object>> enemies= (Array<OrderedMap<String, Object>>) ((OrderedMap<String,Object>)enemVals).get("enemies");
 		
-		Resources.ingame.enemyTypes=new Array<ConfiguredEnemy>(enemies.size);
+		Res.ingame.enemyTypes=new Array<ConfiguredEnemy>(enemies.size);
 		for(int i=0;i<enemies.size;i++){
-			Resources.ingame.enemyTypes.add(new ConfiguredEnemy(enemies.get(i)));
+			Res.ingame.enemyTypes.add(new ConfiguredEnemy(enemies.get(i)));
 		}
 		
 		
 		// read items
 		Object itemVals=reader.parse(Gdx.files.internal("space/items.json"));
 		Array<OrderedMap<String, Object>> items= (Array<OrderedMap<String, Object>>) ((OrderedMap<String,Object>)itemVals).get("items");
-		Resources.ingame.itemTypes=new Array<ConfiguredItem>(items.size);
+		Res.ingame.itemTypes=new Array<ConfiguredItem>(items.size);
 		for(int i=0;i<items.size;i++){
-			Resources.ingame.itemTypes.add(new ConfiguredItem(items.get(i)));
+			Res.ingame.itemTypes.add(new ConfiguredItem(items.get(i)));
 		}
 		
 	}

@@ -101,7 +101,7 @@ public class IngameScreen extends AbstractScreen{
 	
 	public IngameScreen() {
 
-		Resources.ingame=this;
+		Res.ingame=this;
 		
 		chunks=new ArrayList<Chunk>();
 		marker=new ArrayList<Marker>();
@@ -125,12 +125,12 @@ public class IngameScreen extends AbstractScreen{
 		cameraRect=new Rectangle();
 		
 		// get textures
-		point_start=Resources.atlas.findRegion("point_start");
-		point_end=Resources.atlas.findRegion("point_end");
-		background=Resources.atlas.findRegion("background");
-		lifeborder=Resources.atlas.findRegion("life_border");
-		lifefill=Resources.atlas.findRegion("life_fill");
-		switchWeapons=Resources.atlas.findRegion("switchWeapons");
+		point_start=Res.atlas.findRegion("point_start");
+		point_end=Res.atlas.findRegion("point_end");
+		background=Res.atlas.findRegion("background");
+		lifeborder=Res.atlas.findRegion("life_border");
+		lifefill=Res.atlas.findRegion("life_fill");
+		switchWeapons=Res.atlas.findRegion("switchWeapons");
 		
 		
 		// read configuration for enemies and weapons
@@ -287,12 +287,12 @@ public class IngameScreen extends AbstractScreen{
 		batch.begin();
 		int padding=10;
 		if(player.weapon.maxAmmo==-1){
-			Resources.font.draw(batch, "ammo inf", -camera.getWidth()/2+padding,camera.getHeight()/2);
+			Res.font.draw(batch, "ammo inf", -camera.getWidth()/2+padding,camera.getHeight()/2);
 		}else{
-			Resources.font.draw(batch, "ammo "+player.weapon.ammo, -camera.getWidth()/2+padding,camera.getHeight()/2);
+			Res.font.draw(batch, "ammo "+player.weapon.ammo, -camera.getWidth()/2+padding,camera.getHeight()/2);
 		}
 		
-		Resources.font.drawWrapped(batch, "money: "+(int)player.money, -camera.getWidth()/2,camera.getHeight()/2,camera.getWidth()-padding,HAlignment.CENTER);
+		Res.font.drawWrapped(batch, "money: "+(int)player.money, -camera.getWidth()/2,camera.getHeight()/2,camera.getWidth()-padding,HAlignment.CENTER);
 		
 //		Resources.font.drawWrapped(batch, "life "+(int)player.life, -camera.getWidth()/2,camera.getHeight()/2,camera.getWidth()-padding,HAlignment.RIGHT);
 		// a really cool life bar
@@ -303,7 +303,7 @@ public class IngameScreen extends AbstractScreen{
 		
 		
 		if(avaiableToLandOnThisFrame!=null){
-			Resources.font.drawWrapped(batch, "land on this planet", -camera.getWidth()/2,-camera.getHeight()/2+40,camera.getWidth()-padding,HAlignment.RIGHT);
+			Res.font.drawWrapped(batch, "land on this planet", -camera.getWidth()/2,-camera.getHeight()/2+40,camera.getWidth()-padding,HAlignment.RIGHT);
 		}else{
 			batch.draw(switchWeapons, camera.getWidth()/2-62,-camera.getHeight()/2);
 		}
@@ -311,7 +311,7 @@ public class IngameScreen extends AbstractScreen{
 		
 		
 		
-		Resources.font.drawWrapped(batch, "FPS "+Gdx.graphics.getFramesPerSecond(), padding-camera.getWidth()/2,-camera.getHeight()/2+40,camera.getWidth(),HAlignment.LEFT);
+		Res.font.drawWrapped(batch, "FPS "+Gdx.graphics.getFramesPerSecond(), padding-camera.getWidth()/2,-camera.getHeight()/2+40,camera.getWidth(),HAlignment.LEFT);
 		
 		
 		batch.end();
@@ -467,6 +467,8 @@ public class IngameScreen extends AbstractScreen{
 			if(touchPos.y-camera.position.y<-camera.getHeight()/2+64&&touchPos.x-camera.position.x>camera.getWidth()/2-64){
 				if(avaiableToLandOnThisFrame!=null){
 					//game.setScreen(new GameOverScreen(game));
+					
+					SpaceGame.screen(new ShopScreen());
 				}else{
 					player.switchWeapon();
 				}
