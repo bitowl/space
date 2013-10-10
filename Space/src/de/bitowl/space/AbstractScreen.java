@@ -6,14 +6,11 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class AbstractScreen implements Screen{
-	SpaceGame game;
 	
 	SpaceCamera camera;
 	SpriteBatch batch;
 	
-	public AbstractScreen(SpaceGame pGame){
-		game=pGame;
-
+	public AbstractScreen(){
 		camera=new SpaceCamera();
 		camera.setToOrtho(false,800,480);
 		batch=new SpriteBatch();

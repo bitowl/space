@@ -17,4 +17,10 @@ public class Resources {
 	public static BitmapFont smallfont;
 	
 	public static Preferences preferences; // TODO build own preferences system based on JSON and saved in the application directory instead of the home folder
+
+	public static void dispose() {
+		atlas.dispose();
+		font.dispose();
+		smallfont.dispose();
+	}
 }

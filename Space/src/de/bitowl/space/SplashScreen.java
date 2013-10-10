@@ -16,8 +16,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 public class SplashScreen extends AbstractScreen {	
 	Texture bitowl;
-	public SplashScreen(SpaceGame pGame) {
-		super(pGame);
+	public SplashScreen() {
 		
 		// load preferences
 		Preferences.init();
@@ -58,6 +57,6 @@ public class SplashScreen extends AbstractScreen {
 		batch.begin();
 		batch.draw(bitowl,Gdx.graphics.getWidth()/2-64,Gdx.graphics.getHeight()/2-64,128,128);
 		batch.end();
-		game.setScreen(new IngameScreen(game));
+		SpaceGame.screen(new IngameScreen());
 	}
 }

@@ -99,8 +99,7 @@ public class IngameScreen extends AbstractScreen{
 	public Array<ConfiguredItem> itemTypes;
 	public float totalItemFrequency;
 	
-	public IngameScreen(SpaceGame pGame) {
-		super(pGame);
+	public IngameScreen() {
 
 		Resources.ingame=this;
 		
@@ -159,7 +158,7 @@ public class IngameScreen extends AbstractScreen{
 		
 		avaiableToLandOnThisFrame=null;
 		if(player.life<=0){
-			game.setScreen(new GameOverScreen(game));
+			SpaceGame.screen(new GameOverScreen());
 			//Gdx.app.exit(); // GAME OVER
 		}
 
