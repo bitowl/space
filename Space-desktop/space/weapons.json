@@ -112,7 +112,28 @@
 			}
 		]
 	},
-	
+	{
+		"name": "mine",
+		"upgrades": [
+			{
+				"shipimage": null,
+				"maxAmmo": 10,
+				"autoShootDelay": 2,
+				"manualDelay": 1,
+				"shots": [
+					{
+						"angle": 0,
+						"type": 2,
+						"speed": 0,
+						"strength": 10,
+						"image": "mine",
+						"explosionRadius": 500
+					},
+					
+				]
+			}
+		]
+	},
 	{
 		"name": "cheater",
 		"disabled":true,

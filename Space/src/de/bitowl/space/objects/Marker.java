@@ -1,6 +1,7 @@
 package de.bitowl.space.objects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -34,7 +35,7 @@ public class Marker extends GameObject{
 			float angle=(float) Math.atan2(y-centerY, x-centerX);
 			
 			
-			System.out.println(y+"-"+centerY+" | "+x+"-"+centerX+"  -> "+angle);
+		//	System.out.println(y+"-"+centerY+" | "+x+"-"+centerX+"  -> "+angle);
 		//	int radius=Math.min(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2)-16;
 			setRotation(MathUtils.radDeg*angle);	
 			//float bildschirmAngle = MathUtils.atan2(Gdx.graphics.getHeight()/2,Gdx.graphics.getWidth()/2);

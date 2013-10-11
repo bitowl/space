@@ -36,11 +36,13 @@ public class Res {
 	public static void load() {
 		// load all textures
 		atlas=new TextureAtlas(Gdx.files.internal("textures/textures.atlas"));
-		// make the textures smooth
+
+/*		// make the textures smooth
+ 		// this is done now in the graphical texture packer
 		Iterator<Texture> iterator=atlas.getTextures().iterator();
 		while(iterator.hasNext()){
 			iterator.next().setFilter(TextureFilter.Linear,TextureFilter.Linear);
-		}
+		}*/
 		
 		// load font
 		font=new BitmapFont(Gdx.files.internal("fonts/karmatic_arcade.fnt"), false);
