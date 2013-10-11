@@ -56,6 +56,7 @@ public class ConfigReader {
 		Array<OrderedMap<String, Object>> items= (Array<OrderedMap<String, Object>>) ((OrderedMap<String,Object>)itemVals).get("items");
 		Res.ingame.itemTypes=new Array<ConfiguredItem>(items.size);
 		for(int i=0;i<items.size;i++){
+			if(items.get(i).containsKey("disabled")){continue;} // dis item is not used in da game
 			Res.ingame.itemTypes.add(new ConfiguredItem(items.get(i)));
 		}
 		

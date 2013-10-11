@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -134,7 +135,7 @@ public class IngameScreen extends AbstractScreen{
 		// read configuration for enemies and weapons
 		ConfigReader.initGameValues();
 		
-		//marker.add(new Marker(400,400));
+		marker.add(new Marker(0,0));
 		
 	}
 	

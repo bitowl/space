@@ -4,12 +4,12 @@
 		"name": "green default guy",
 		"image": "enemy",
 		"animTime": 0.1,
-		"maxSpeed": 200,
-		"accSpeed": 50,
+		"maxSpeed": 150,
+		"accSpeed": 40,
 		"maxAccAngle": 3,
 		"life": 1,
 		"strength": 1,
-		"frequency": 10
+		"frequency": 100
 	},
 	{
 		"name": "skull",

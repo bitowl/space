@@ -26,7 +26,7 @@ public class Planet extends Item{
 		
 		// create a marker for this planet :D
 		// TODO do not create a new one, if there is already one for this place ^^
-	//	Resources.ingame.marker.add(new Marker(pX+271/2,pY+293/2));
+		Res.ingame.marker.add(new Marker(pX+271/2,pY+293/2));
 	}
 	@Override
 	public void collected() {
