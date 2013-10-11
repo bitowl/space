@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class ShopScreen implements Screen {
@@ -15,8 +16,7 @@ public class ShopScreen implements Screen {
 	
 	public ShopScreen() {
 		stage=new Stage();
-        Gdx.input.setInputProcessor(stage);
-
+		
 		// UI building
 		Table table=new Table();
 		table.setFillParent(true);
@@ -28,18 +28,41 @@ public class ShopScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
-				SpaceGame.screen(new IngameScreen());
+				SpaceGame.screen(Res.ingame);
 			}
 		});
-		table.add(back);
+		back.pad(5);
+		table.add(back).pad(5);
 		
-		Label title=new Label("Shop", Res.skin);
-		table.add(title);
+		Label title=new Label("Shop", Res.skin,"title");
+		table.add(title).expandX().align(Align.center).colspan(3).row();
+		
+		Label laser=new Label("Laser",Res.skin);
+		table.add(laser);
+		
+		Label desc=new Label("ein einfacher Laser, den jeder gerne nutzt, um nützliche Sachen zu erschaffen ohne kekse ist die welt doch auch nur halb so cool",Res.skin);
+		desc.setWrap(true);
+		desc.setWidth(180);
+		table.add(desc).expandX().fill();
+		
+		Label price=new Label("1 Million DollarZ",Res.skin);
+		table.add(price).padLeft(10);
+		
+		TextButton upgrade=new TextButton("upgrade!", Res.skin);
+		table.add(upgrade).pad(5).row().expandY().fill();
 		
 		
-
+		
+		
+		
+	//	table.debug();
 	}
 
+	public void show(){
+        Gdx.input.setInputProcessor(stage);
+
+	}
+	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0,0,0,1);
@@ -48,17 +71,13 @@ public class ShopScreen implements Screen {
 		stage.act(delta);
 		stage.draw();
 		
+		Table.drawDebug(stage);
+		
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		stage.setViewport(width, height, true);
-		
-	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
 		
 	}
 

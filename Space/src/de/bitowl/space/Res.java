@@ -18,13 +18,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 public class Res {
 	public static TextureAtlas atlas;
-	public static IngameScreen ingame;
 	public static BitmapFont font;
 	public static BitmapFont smallfont;
 	public static Skin skin;
 	
 	public static Preferences preferences; // TODO build own preferences system based on JSON and saved in the application directory instead of the home folder
 
+	// all dem GameScreens
+	public static IngameScreen ingame;
+	public static ShopScreen shop;
+	public static GameOverScreen gameover;
+	
+	
 	/**
 	 * loads all the cool stuff
 	 */
@@ -43,6 +48,13 @@ public class Res {
 		
 		skin=new Skin(Gdx.files.internal("ui/defaultskin.json"));
 		
+		
+		// generate dem screens
+		
+		// TODO maybe it's useful to create a single stage for all menus 
+		ingame=new IngameScreen();
+		shop=new ShopScreen();
+		gameover=new GameOverScreen();
 		
 	}
 	

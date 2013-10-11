@@ -12,9 +12,8 @@ public class SpaceGame extends Game {
 		setScreen(new SplashScreen());
 	}
 	
-	public static void screen(Screen shopScreen){
-		game.getScreen().dispose(); // TODO vllt. alle Screens laden und erst am ende disposen?
-		game.setScreen(shopScreen);
+	public static void screen(Screen pScreen){
+		game.setScreen(pScreen);
 	}
 	@Override
 	public void dispose() {

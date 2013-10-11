@@ -19,7 +19,8 @@ public class GameOverScreen extends AbstractScreen {
 		Res.font.drawWrapped(batch, "GAME OVER",0,Gdx.graphics.getHeight()/2+32,Gdx.graphics.getWidth(),HAlignment.CENTER);
 		batch.end();
 		if(Gdx.input.justTouched()){
-			SpaceGame.screen(new IngameScreen());
+			Res.ingame=new IngameScreen(); // start a new game
+			SpaceGame.screen(Res.ingame);
 		}
 		if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
 			Gdx.app.exit();

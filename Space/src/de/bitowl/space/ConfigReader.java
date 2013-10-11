@@ -31,7 +31,7 @@ public class ConfigReader {
 		GameObjects.player.weapons=new Array<Weapon>(weapons.size);
 		
 		for(int i=0;i<weapons.size;i++){
-			
+			if(weapons.get(i).containsKey("disabled")){continue;} // dis weapon is not used in da game
 			Array<OrderedMap<String, Object>> upgrades=(Array<OrderedMap<String, Object>>) weapons.get(i).get("upgrades");
 			ConfiguredWeapon weapon=new ConfiguredWeapon(upgrades.get(0)); // let the weapons configure themselves
 			weapon.name=(String) weapons.get(i).get("name");
@@ -46,6 +46,7 @@ public class ConfigReader {
 		
 		Res.ingame.enemyTypes=new Array<ConfiguredEnemy>(enemies.size);
 		for(int i=0;i<enemies.size;i++){
+			if(enemies.get(i).containsKey("disabled")){continue;} // dis enemy is not used in da game
 			Res.ingame.enemyTypes.add(new ConfiguredEnemy(enemies.get(i)));
 		}
 		

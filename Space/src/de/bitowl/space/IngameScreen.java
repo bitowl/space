@@ -10,8 +10,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -77,12 +75,13 @@ public class IngameScreen extends AbstractScreen{
 	enum ControlScheme{
 		TOUCH_JOYSTICK,
 		TOUCH_AIM,
+		MOUSE_AIM,
 		ACCELERATION
 	};
 	/**
 	 * which control scheme to use
 	 */
-	ControlScheme controls=ControlScheme.TOUCH_JOYSTICK;
+	ControlScheme controls=ControlScheme.MOUSE_AIM;
 	
 	
 	Random random;
@@ -116,8 +115,7 @@ public class IngameScreen extends AbstractScreen{
 		player.setRotation(-90);
 		
 		
-		GameInputProcessor inputProcessor=new GameInputProcessor();
-		Gdx.input.setInputProcessor(inputProcessor);
+
 		
 		// get preferences
 		gameZoom=Preferences.getFloat("gameZoom",1f);
@@ -141,6 +139,11 @@ public class IngameScreen extends AbstractScreen{
 	}
 	
 	
+	public void show(){
+		GameInputProcessor inputProcessor=new GameInputProcessor();
+		Gdx.input.setInputProcessor(inputProcessor);
+	}
+	
 	/**
 	 * we could land on this planet in this frame
 	 */
@@ -158,7 +161,7 @@ public class IngameScreen extends AbstractScreen{
 		
 		avaiableToLandOnThisFrame=null;
 		if(player.life<=0){
-			SpaceGame.screen(new GameOverScreen());
+			SpaceGame.screen(Res.gameover);
 			//Gdx.app.exit(); // GAME OVER
 		}
 
@@ -462,13 +465,16 @@ public class IngameScreen extends AbstractScreen{
 				player.isShooting=true;
 				//return false;
 			}
+			if(controls==ControlScheme.MOUSE_AIM && button==0){
+				player.isShooting=true;
+			}
 			
 			// we want to be able to shoot while moving
 			if(touchPos.y-camera.position.y<-camera.getHeight()/2+64&&touchPos.x-camera.position.x>camera.getWidth()/2-64){
 				if(avaiableToLandOnThisFrame!=null){
 					//game.setScreen(new GameOverScreen(game));
 					
-					SpaceGame.screen(new ShopScreen());
+					SpaceGame.screen(Res.shop);
 				}else{
 					player.switchWeapon();
 				}
@@ -489,8 +495,15 @@ public class IngameScreen extends AbstractScreen{
 			}else{
 				player.isShooting=false;
 			}
-			if(controls==ControlScheme.ACCELERATION){
+			if(controls==ControlScheme.ACCELERATION ){
 				player.isShooting=false;
+			}
+			if(controls==ControlScheme.MOUSE_AIM){
+				if(button==1){
+					player.switchWeapon();
+				}else{
+					player.isShooting=false;
+				}
 			}
 			return false;
 		}
@@ -501,7 +514,7 @@ public class IngameScreen extends AbstractScreen{
 				Vector3 touchPos = new Vector3();
 				touchPos.set(screenX, screenY, 0);
 				camera.unproject(touchPos);
-				if(controls==ControlScheme.TOUCH_JOYSTICK){
+				if(controls==ControlScheme.TOUCH_JOYSTICK || controls==ControlScheme.MOUSE_AIM){
 					//
 					player.accSpeed=80;//;(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;//-150;
 					player.MAX_SPEED=player.accSpeed=(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;
@@ -568,6 +581,22 @@ public class IngameScreen extends AbstractScreen{
 
 		@Override
 		public boolean mouseMoved(int screenX, int screenY) {
+			
+			if(controls==ControlScheme.MOUSE_AIM){
+				Vector3 touchPos = new Vector3();
+				touchPos.set(screenX, screenY, 0);
+				camera.unproject(touchPos);
+
+				player.accSpeed=80;//;(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;//-150;
+				player.MAX_SPEED=player.accSpeed=(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;
+				if(player.MAX_SPEED>500){player.MAX_SPEED=500;}
+				//player.speed=(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;
+				player.angle=MathUtils.atan2((touchPos.y-camera.position.y-originY),(touchPos.x-camera.position.x-originX));
+				
+				// rotate the player acording to his angle
+				player.setRotation(MathUtils.radDeg*player.angle-90);
+			}
+			
 			return false;
 		}
 		@Override

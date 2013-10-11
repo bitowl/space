@@ -115,6 +115,7 @@
 	
 	{
 		"name": "cheater",
+		"disabled":true,
 		"upgrades": [
 			{
 				"shipimage": null,
