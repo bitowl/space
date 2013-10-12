@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -19,8 +20,8 @@ public class ShopScreen implements Screen {
 		
 		// UI building
 		Table table=new Table();
-		table.setFillParent(true);
-		stage.addActor(table);
+		//table.setFillParent(true);
+		//stage.addActor(table);
 		
 		
 		TextButton back=new TextButton("back", Res.skin);
@@ -37,7 +38,9 @@ public class ShopScreen implements Screen {
 		Label title=new Label("Shop", Res.skin,"title");
 		table.add(title).expandX().align(Align.center).colspan(3).row();
 		
-		Label laser=new Label("Laser",Res.skin);
+		for(int i=0;i<18;i++){
+		
+		Label laser=new Label("Laser"+i,Res.skin);
 		table.add(laser);
 		
 		Label desc=new Label("ein einfacher Laser, den jeder gerne nutzt, um nützliche Sachen zu erschaffen ohne kekse ist die welt doch auch nur halb so cool",Res.skin);
@@ -49,10 +52,17 @@ public class ShopScreen implements Screen {
 		table.add(price).padLeft(10);
 		
 		TextButton upgrade=new TextButton("upgrade!", Res.skin);
-		table.add(upgrade).pad(5).row().expandY().fill();
+		table.add(upgrade).pad(5).row();
+		}
 		
+		//table.add().expandY(); // alles nach oben verschieben
 		
-		
+		ScrollPane pane=new ScrollPane(table,Res.skin);
+		pane.setFillParent(true);
+		pane.setForceOverscroll(false, false);
+		pane.setFadeScrollBars(false);
+		pane.setOverscroll(false, false);
+		stage.addActor(pane);
 		
 		
 	//	table.debug();
