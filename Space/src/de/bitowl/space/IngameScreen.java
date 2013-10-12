@@ -635,7 +635,7 @@ public class IngameScreen extends AbstractScreen{
 	public void changeZoom(float pChange){
 		gameZoom+=pChange;
 		
-		if(gameZoom<0.2f){gameZoom=0.2f;}
+		if(gameZoom<0.5f){gameZoom=0.5f;}
 		if(gameZoom>10f){gameZoom=10f;}
 		
 		
@@ -659,7 +659,7 @@ public class IngameScreen extends AbstractScreen{
 				return false;
 			}
 			
-			if(Math.abs(value)<0.1){value=0;} // dead zone TODO configurable?
+			
 			
 			if(axisIndex==0){
 				speedX=value;
@@ -673,7 +673,9 @@ public class IngameScreen extends AbstractScreen{
 			player.MAX_SPEED=player.accSpeed=(float)Math.sqrt(speedX*speedX+speedY*speedY)*500;//SENSITIVITY; // maximal 500
 			if(player.MAX_SPEED>500){player.MAX_SPEED=500;}
 
-			player.angle=MathUtils.atan2(speedY,speedX);
+			if(speedY!=0||speedY!=0){
+				player.angle=MathUtils.atan2(speedY,speedX);
+			}
 		
 			// rotate the player acording to his angle
 			player.setRotation(MathUtils.radDeg*player.angle-90);
@@ -681,7 +683,8 @@ public class IngameScreen extends AbstractScreen{
 			
 			
 			if(axisIndex==3){
-				incZoom=value;
+				if(Math.abs(value)<0.1){value=0;} // dead zone TODO configurable?
+				incZoom=value*3;
 			//	changeZoom(value/6);
 			}
 			return false;
@@ -698,6 +701,10 @@ public class IngameScreen extends AbstractScreen{
 				player.switchWeapon();
 			}
 			
+			
+			if(buttonIndex==9){
+				Gdx.app.exit();
+			}
 			return false;
 		}
 		@Override
@@ -709,6 +716,8 @@ public class IngameScreen extends AbstractScreen{
 			if(buttonIndex==1 || buttonIndex==7){
 				player.isShooting=false;
 			}
+			
+			
 			
 			return false;
 		}
