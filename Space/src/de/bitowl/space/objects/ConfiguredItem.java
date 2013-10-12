@@ -1,6 +1,7 @@
 package de.bitowl.space.objects;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import de.bitowl.space.Res;
@@ -13,17 +14,17 @@ public class ConfiguredItem {
 	AtlasRegion image;
 	float frequency;
 	
-	public ConfiguredItem(OrderedMap<String, Object> config){
-		type=getType((String) config.get("type"));
+	public ConfiguredItem(JsonValue config){
+		type=getType(config.getString("type"));
 
-		frequency=(Float) config.get("frequency");
+		frequency=config.getFloat("frequency");
 		Res.ingame.totalItemFrequency+=frequency;
 		if(type!=Type.NONE){
-			amount=(Float)config.get("amount");
+			amount=config.getFloat("amount");
 			if(type==Type.AMMO){
-				weapon=getWeapon(config.get("weapon"));
+				weapon=getWeapon(config.getString("weapon"));
 			}
-			image=Res.atlas.findRegion((String) config.get("image"));
+			image=Res.atlas.findRegion(config.getString("image"));
 		}
 	}
 	
@@ -39,13 +40,13 @@ public class ConfiguredItem {
 		}
 		return Type.NONE;
 	}
-	public static Weapon getWeapon(Object object){
+	public static Weapon getWeapon(String weapon){
 		for(int i=0;i<GameObjects.player.weapons.size;i++){
-			if(GameObjects.player.weapons.get(i).name.equals(object)){
+			if(GameObjects.player.weapons.get(i).name.equals(weapon)){
 				return GameObjects.player.weapons.get(i);
 			}
 		}
-		System.err.println("no weapon called "+object+" found :(");
+		System.err.println("no weapon called "+weapon+" found :(");
 		return null;
 	}
 

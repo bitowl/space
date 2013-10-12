@@ -2,6 +2,7 @@ package de.bitowl.space.objects;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import de.bitowl.space.AnimAction;
@@ -20,20 +21,20 @@ public class ConfiguredEnemy {
 	public float frequency;
 	
 	@SuppressWarnings("unchecked")
-	public ConfiguredEnemy(OrderedMap<String, Object> config) {
-		name=(String) config.get("name");
-		image=(String) config.get("image");
-		animTime=(Float) config.get("animTime",-1f);
-		maxSpeed=(Float) config.get("maxSpeed");
-		accSpeed=(Float) config.get("accSpeed");
-		maxAccAngle=(Float) config.get("maxAccAngle");
-		life=(Float) config.get("life");
-		strength=(Float) config.get("strength");
+	public ConfiguredEnemy(JsonValue config) {
+		name		= config.getString("name");
+		image		= config.getString("image");
+		animTime	= config.getFloat("animTime",-1f);
+		maxSpeed	= config.getFloat("maxSpeed");
+		accSpeed	= config.getFloat("accSpeed");
+		maxAccAngle	= config.getFloat("maxAccAngle");
+		life		= config.getFloat("life");
+		strength	= config.getFloat("strength");
 		
 		if(config.get("weapon")!=null){
-			weapon=new ConfiguredWeapon((OrderedMap<String, Object>) config.get("weapon"));
+			weapon=new ConfiguredWeapon(config.get("weapon"));
 		}
-		frequency=(Float) config.get("frequency");
+		frequency=config.getFloat("frequency");
 		Res.ingame.totalEnemyFrequency+=frequency;
 	}
 	

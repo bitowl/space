@@ -148,6 +148,7 @@ public class IngameScreen extends AbstractScreen{
 		GameInputProcessor inputProcessor=new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 		System.out.println(Controllers.getControllers().size+":O");
+		Controllers.addListener(new ControllerControlls());
 	}
 	@Override
 	public void hide() {
@@ -161,6 +162,10 @@ public class IngameScreen extends AbstractScreen{
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		
+		if(incZoom!=0){
+			changeZoom(incZoom*delta);
+		}
 		
 		camera.zoom=gameZoom;
 
@@ -617,6 +622,10 @@ public class IngameScreen extends AbstractScreen{
 		}
 	}
 	
+	/**
+	 * increases zoom every frame
+	 */
+	float incZoom;
 	
 	/**
 	 * changes the zoom of the camera
@@ -650,13 +659,16 @@ public class IngameScreen extends AbstractScreen{
 				return false;
 			}
 			
-			if(axisIndex==1){
+			if(Math.abs(value)<0.1){value=0;} // dead zone TODO configurable?
+			
+			if(axisIndex==0){
 				speedX=value;
-			}else if(axisIndex==0){
-				speedY=value;
+			}else if(axisIndex==1){
+				speedY=-value;
 			}
 			
 			
+			if(axisIndex==0 || axisIndex==1){
 			player.accSpeed=80;
 			player.MAX_SPEED=player.accSpeed=(float)Math.sqrt(speedX*speedX+speedY*speedY)*500;//SENSITIVITY; // maximal 500
 			if(player.MAX_SPEED>500){player.MAX_SPEED=500;}
@@ -665,7 +677,41 @@ public class IngameScreen extends AbstractScreen{
 		
 			// rotate the player acording to his angle
 			player.setRotation(MathUtils.radDeg*player.angle-90);
+			}
+			
+			
+			if(axisIndex==3){
+				incZoom=value;
+			//	changeZoom(value/6);
+			}
 			return false;
 		}
+		@Override
+		public boolean buttonDown(Controller controller, int buttonIndex) {
+			if(controls!=ControlScheme.CONTROLLER){
+				return false;
+			}
+			
+			if(buttonIndex==1 || buttonIndex==7){
+				player.isShooting=true;
+			}else if(buttonIndex==0 || buttonIndex==5){
+				player.switchWeapon();
+			}
+			
+			return false;
+		}
+		@Override
+		public boolean buttonUp(Controller controller, int buttonIndex) {
+			if(controls!=ControlScheme.CONTROLLER){
+				return false;
+			}
+			
+			if(buttonIndex==1 || buttonIndex==7){
+				player.isShooting=false;
+			}
+			
+			return false;
+		}
+
 	}
 }

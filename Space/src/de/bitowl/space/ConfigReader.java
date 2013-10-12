@@ -31,32 +31,36 @@ public class ConfigReader {
 		GameObjects.player.weapons=new Array<Weapon>(weapons.size);
 		
 		for(int i=0;i<weapons.size;i++){
-			if(weapons.get(i).get("disabled").isNull()){continue;} // dis weapon is not used in da game
-			JsonValue upgrades=weapons.get(i).get("upgrades");
-			ConfiguredWeapon weapon=new ConfiguredWeapon(upgrades.get(0)); // let the weapons configure themselves
-			weapon.name=weapons.get(i).get("name").asString();
+			
+			if(weapons.get(i).get("disabled")!=null){continue;} // dis weapon is not used in da game
+			System.err.println("WEAPON "+i+": "+weapons.get(i).getString("name"));
+			
+			
+			JsonValue upgrades		= weapons.get(i).get("upgrades");
+			ConfiguredWeapon weapon	= new ConfiguredWeapon(upgrades.get(0)); // let the weapons configure themselves
+			weapon.name				= weapons.get(i).getString("name");
 			GameObjects.player.weapons.add(weapon);
 		}
 		
 		GameObjects.player.weapon=GameObjects.player.weapons.get(GameObjects.player.currentWeapon);
 		
 		// read enemy
-		Object enemVals=reader.parse(Gdx.files.internal("space/enemies.json"));
-		Array<OrderedMap<String, Object>> enemies= (Array<OrderedMap<String, Object>>) ((OrderedMap<String,Object>)enemVals).get("enemies");
+		JsonValue enemVals	= reader.parse(Gdx.files.internal("space/enemies.json"));
+		JsonValue enemies	= enemVals.get("enemies");
 		
 		Res.ingame.enemyTypes=new Array<ConfiguredEnemy>(enemies.size);
 		for(int i=0;i<enemies.size;i++){
-			if(enemies.get(i).containsKey("disabled")){continue;} // dis enemy is not used in da game
+			if(enemies.get(i).get("disabled")!=null){continue;} // dis enemy is not used in da game
 			Res.ingame.enemyTypes.add(new ConfiguredEnemy(enemies.get(i)));
 		}
 		
 		
 		// read items
-		Object itemVals=reader.parse(Gdx.files.internal("space/items.json"));
-		Array<OrderedMap<String, Object>> items= (Array<OrderedMap<String, Object>>) ((OrderedMap<String,Object>)itemVals).get("items");
+		JsonValue itemVals	= reader.parse(Gdx.files.internal("space/items.json"));
+		JsonValue items		= itemVals.get("items");
 		Res.ingame.itemTypes=new Array<ConfiguredItem>(items.size);
 		for(int i=0;i<items.size;i++){
-			if(items.get(i).containsKey("disabled")){continue;} // dis item is not used in da game
+			if(items.get(i).get("disabled")!=null){continue;} // dis item is not used in da game
 			Res.ingame.itemTypes.add(new ConfiguredItem(items.get(i)));
 		}
 		

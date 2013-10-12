@@ -1,6 +1,7 @@
 package de.bitowl.space.objects;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import de.bitowl.space.Res;
@@ -16,29 +17,29 @@ public class ConfiguredWeapon extends Weapon{
 	Array<ConfiguredShot> shots;
 	
 	@SuppressWarnings("unchecked")
-	public ConfiguredWeapon(OrderedMap<String, Object> config) {
-		System.out.println(config);
+	public ConfiguredWeapon(JsonValue config) {
+		//System.out.println(config);
 		// read the configuration
-		maxAmmo=(int)(float)(Float) config.get("maxAmmo");
+		maxAmmo=config.getInt("maxAmmo");
 		ammo=maxAmmo; // fill the weapon :)
-		autoShootDelay=(Float) config.get("autoShootDelay");
-		manualDelay=(Float) config.get("manualDelay");
+		autoShootDelay=config.getFloat("autoShootDelay");
+		manualDelay=config.getFloat("manualDelay");
 		
 		shots=new Array<ConfiguredShot>();
-		Array<Object> shotsConfig=(Array<Object>) config.get("shots");
+		JsonValue shotsConfig=config.get("shots");
 		for(int i=0;i<shotsConfig.size;i++){
 			ConfiguredShot shot=new ConfiguredShot();
-			OrderedMap<String, Object> shotConfig=(OrderedMap<String, Object>) shotsConfig.get(i);
-			shot.angle=(Float) shotConfig.get("angle");
-			shot.type=ConfiguredShot.getType((int)(float)(Float)shotConfig.get("type"));
-			shot.speed=(Float) shotConfig.get("speed");
-			shot.strength=(Float) shotConfig.get("strength");
-			shot.image=(String) shotConfig.get("image");
-			shot.animTime=(Float) shotConfig.get("animTime", -1.0f);
+			JsonValue shotConfig=shotsConfig.get(i);
+			shot.angle		= shotConfig.getFloat("angle");
+			shot.type		= ConfiguredShot.getType(shotConfig.getInt("type"));
+			shot.speed		= shotConfig.getFloat("speed");
+			shot.strength	= shotConfig.getFloat("strength");
+			shot.image		= shotConfig.getString("image");
+			shot.animTime	= shotConfig.getFloat("animTime", -1.0f);
 			if(shot.type==Type.STEERED){
-				shot.maxAccAngle=(Float) shotConfig.get("maxAccAngle");
+				shot.maxAccAngle=shotConfig.getFloat("maxAccAngle");
 			}else if(shot.type==Type.EXPLOSIVE){
-				shot.explosionRadius=(Float) shotConfig.get("explosionRadius");
+				shot.explosionRadius=shotConfig.getFloat("explosionRadius");
 			}
 			
 			shots.add(shot);
