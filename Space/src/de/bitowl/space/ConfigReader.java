@@ -3,6 +3,7 @@ package de.bitowl.space;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import de.bitowl.space.objects.ConfiguredEnemy;
@@ -24,17 +25,16 @@ public class ConfigReader {
 		JsonReader reader=new JsonReader();
 		
 		// read weapons
-		Object values=reader.parse(Gdx.files.internal("space/weapons.json"));
-		OrderedMap<String, Object> head=(OrderedMap<String,Object>)values;
-		Array<OrderedMap<String, Object>> weapons=(Array<OrderedMap<String, Object>>) head.get("weapons");
+		JsonValue values=reader.parse(Gdx.files.internal("space/weapons.json"));
+		JsonValue weapons=values.get("weapons");
 		
 		GameObjects.player.weapons=new Array<Weapon>(weapons.size);
 		
 		for(int i=0;i<weapons.size;i++){
-			if(weapons.get(i).containsKey("disabled")){continue;} // dis weapon is not used in da game
-			Array<OrderedMap<String, Object>> upgrades=(Array<OrderedMap<String, Object>>) weapons.get(i).get("upgrades");
+			if(weapons.get(i).get("disabled").isNull()){continue;} // dis weapon is not used in da game
+			JsonValue upgrades=weapons.get(i).get("upgrades");
 			ConfiguredWeapon weapon=new ConfiguredWeapon(upgrades.get(0)); // let the weapons configure themselves
-			weapon.name=(String) weapons.get(i).get("name");
+			weapon.name=weapons.get(i).get("name").asString();
 			GameObjects.player.weapons.add(weapon);
 		}
 		

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.OrderedMap;
 
@@ -18,9 +19,10 @@ public class Preferences {
 	
 		// read all the preferences and save it in the hashmap TODO just use the OrderedMap from libgdx?
 		@SuppressWarnings("unchecked")
-		OrderedMap<String, Object> values=(OrderedMap<String,Object>)reader.parse(Gdx.files.local("space/preferences.json"));
-		for(String key : values.keys()){
-			preferences.put(key, values.get(key));
+		JsonValue values=reader.parse(Gdx.files.local("space/preferences.json"));
+		
+		for(JsonValue entry = values.child(); entry != null; entry = entry.next()){
+			preferences.put(entry.name, entry.asString());
 		}
 	}
 	

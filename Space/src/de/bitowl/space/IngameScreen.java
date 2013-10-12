@@ -7,6 +7,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerAdapter;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -77,12 +80,13 @@ public class IngameScreen extends AbstractScreen{
 		TOUCH_JOYSTICK,
 		TOUCH_AIM,
 		MOUSE_AIM,
-		ACCELERATION
+		ACCELERATION,
+		CONTROLLER
 	};
 	/**
 	 * which control scheme to use
 	 */
-	ControlScheme controls=ControlScheme.MOUSE_AIM;
+	ControlScheme controls=ControlScheme.CONTROLLER;
 	
 	
 	Random random;
@@ -143,8 +147,12 @@ public class IngameScreen extends AbstractScreen{
 	public void show(){
 		GameInputProcessor inputProcessor=new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
+		System.out.println(Controllers.getControllers().size+":O");
 	}
-	
+	@Override
+	public void hide() {
+		// TODO remove controller listener
+	}
 	/**
 	 * we could land on this planet in this frame
 	 */
@@ -626,5 +634,38 @@ public class IngameScreen extends AbstractScreen{
 		// TODO vllt. in hide() packen
 	/*	Preferences.putFloat("gameZoom", gameZoom);
 		Preferences.flush();*/
+	}
+	
+	
+	// controll via controller
+	class ControllerControlls extends ControllerAdapter{
+		
+		float speedX;
+		float speedY;
+		
+		@Override
+		public boolean axisMoved(Controller controller, int axisIndex,
+				float value) {
+			if(controls!=ControlScheme.CONTROLLER){
+				return false;
+			}
+			
+			if(axisIndex==1){
+				speedX=value;
+			}else if(axisIndex==0){
+				speedY=value;
+			}
+			
+			
+			player.accSpeed=80;
+			player.MAX_SPEED=player.accSpeed=(float)Math.sqrt(speedX*speedX+speedY*speedY)*500;//SENSITIVITY; // maximal 500
+			if(player.MAX_SPEED>500){player.MAX_SPEED=500;}
+
+			player.angle=MathUtils.atan2(speedY,speedX);
+		
+			// rotate the player acording to his angle
+			player.setRotation(MathUtils.radDeg*player.angle-90);
+			return false;
+		}
 	}
 }

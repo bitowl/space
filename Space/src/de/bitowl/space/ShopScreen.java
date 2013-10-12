@@ -59,7 +59,6 @@ public class ShopScreen implements Screen {
 		
 		ScrollPane pane=new ScrollPane(table,Res.skin);
 		pane.setFillParent(true);
-		pane.setForceOverscroll(false, false);
 		pane.setFadeScrollBars(false);
 		pane.setOverscroll(false, false);
 		stage.addActor(pane);
