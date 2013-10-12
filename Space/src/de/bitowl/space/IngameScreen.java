@@ -303,6 +303,7 @@ public class IngameScreen extends AbstractScreen{
 		lifefill.setRegionWidth((int) (player.life*2));
 		batch.draw(lifefill, camera.getWidth()/2-200-padding, camera.getHeight()/2-40,player.life*2,32);//, originX, originY, width, height, scaleX, scaleY, rotation)
 		
+		
 		batch.draw(lifeborder, camera.getWidth()/2-200-padding, camera.getHeight()/2-40);//, originX, originY, width, height, scaleX, scaleY, rotation)
 		
 		
@@ -602,7 +603,28 @@ public class IngameScreen extends AbstractScreen{
 		}
 		@Override
 		public boolean scrolled(int amount) {
+			
+			changeZoom((float)amount/10);
 			return false;
 		}
+	}
+	
+	
+	/**
+	 * changes the zoom of the camera
+	 * checks that zoom stays in bounds
+	 * @param pChange
+	 */
+	public void changeZoom(float pChange){
+		gameZoom+=pChange;
+		
+		if(gameZoom<0.2f){gameZoom=0.2f;}
+		if(gameZoom>10f){gameZoom=10f;}
+		
+		
+		// braucht zu viel Zeit.
+		// TODO vllt. in hide() packen
+	/*	Preferences.putFloat("gameZoom", gameZoom);
+		Preferences.flush();*/
 	}
 }

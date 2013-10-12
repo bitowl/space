@@ -1,7 +1,5 @@
 package de.bitowl.space.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -84,7 +82,7 @@ public class Marker extends GameObject{
 			}
 			
 		}
-		super.draw(batch, 0.5f);
+		super.draw(batch, 1f);
 		
 	}
 }

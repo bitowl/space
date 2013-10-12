@@ -1,7 +1,7 @@
 
 textures.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 background
   rotate: false
@@ -13,7 +13,7 @@ background
 
 textures2.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 earth
   rotate: false
