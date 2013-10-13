@@ -12,8 +12,8 @@ import de.bitowl.space.objects.ConfiguredShot.Type;
  */
 public class ConfiguredWeapon{
 	public String name;
-	Array<Weapon> upgrades;
-	int bought=1; // which upgrade has the player bought
+	public Array<Weapon> upgrades;
+	public int bought=0; // which upgrade has the player bought
 	
 	public ConfiguredWeapon(JsonValue config) {
 		name=config.getString("name");
@@ -35,6 +35,8 @@ public class ConfiguredWeapon{
 		weapon.name="TODO WHO THE HELL NEEDS DIS STUFF?";
 		//weapon.name=name; // TODO any need to set this?
 		
+		
+		weapon.price=config.getInt("price",-1);
 		weapon.maxAmmo=config.getInt("maxAmmo");
 		weapon.ammo=weapon.maxAmmo; // fill the weapon :) TODO read from savegame
 		weapon.autoShootDelay=config.getFloat("autoShootDelay");

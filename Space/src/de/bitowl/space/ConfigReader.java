@@ -42,7 +42,7 @@ public class ConfigReader {
 			Res.weapons.add(weapon);
 		}
 		
-		Res.player.weapon=Res.weapons.get(Res.player.currentWeapon).getCurrent();
+		Res.player.weapon=Res.weapons.get(Res.player.currentWeapon).upgrades.get(0);
 		//GameObjects.player.weapon=GameObjects.player.weapons.get(GameObjects.player.currentWeapon);
 		
 		// read enemy

@@ -3,7 +3,8 @@
 	{
 		"name": "plasmatest",
 		"upgrades": [
-		{
+			{
+				"price":10,			
 				"shipimage": null,
 				"maxAmmo": -1,
 				"autoShootDelay": 0.1,

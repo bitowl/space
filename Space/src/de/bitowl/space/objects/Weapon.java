@@ -32,6 +32,8 @@ public class Weapon {
 	
 	Array<ConfiguredShot> shots;
 	
+	public int price;
+	
 	/**
 	 * a shot is given by a certain ship
 	 * @param weapon 
