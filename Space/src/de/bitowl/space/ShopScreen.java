@@ -38,21 +38,20 @@ public class ShopScreen implements Screen {
 		Label title=new Label("Shop", Res.skin,"title");
 		table.add(title).expandX().align(Align.center).colspan(3).row();
 		
-		for(int i=0;i<18;i++){
-		
-		Label laser=new Label("Laser"+i,Res.skin);
-		table.add(laser);
-		
-		Label desc=new Label("ein einfacher Laser, den jeder gerne nutzt, um nützliche Sachen zu erschaffen ohne kekse ist die welt doch auch nur halb so cool",Res.skin);
-		desc.setWrap(true);
-		desc.setWidth(180);
-		table.add(desc).expandX().fill();
-		
-		Label price=new Label("1 Million DollarZ",Res.skin);
-		table.add(price).padLeft(10);
-		
-		TextButton upgrade=new TextButton("upgrade!", Res.skin);
-		table.add(upgrade).pad(5).row();
+		for(int i=0;i<Res.weapons.size;i++){
+			Label laser=new Label(Res.weapons.get(i).name,Res.skin);
+			table.add(laser);
+			
+			Label desc=new Label("ein einfacher Laser, den jeder gerne nutzt, um nützliche Sachen zu erschaffen ohne kekse ist die welt doch auch nur halb so cool",Res.skin);
+			desc.setWrap(true);
+			desc.setWidth(180);
+			table.add(desc).expandX().fill();
+			
+			Label price=new Label("1 Million DollarZ",Res.skin);
+			table.add(price).padLeft(10);
+			
+			TextButton upgrade=new TextButton("upgrade!", Res.skin);
+			table.add(upgrade).pad(5).row();
 		}
 		
 		//table.add().expandY(); // alles nach oben verschieben

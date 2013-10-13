@@ -50,6 +50,7 @@ public class SplashScreen extends AbstractScreen {
 		batch.end();
 		
 		//SpaceGame.screen(new IngameScreen());
-		SpaceGame.screen(Res.shop);
+		//SpaceGame.screen(Res.shop);
+		SpaceGame.screen(Res.ingame);
 	}
 }

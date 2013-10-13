@@ -2,9 +2,11 @@ package de.bitowl.space.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import de.bitowl.space.Res;
+import de.bitowl.space.Utils;
 
 public class Player extends Ship{
 	/**
@@ -13,6 +15,9 @@ public class Player extends Ship{
 	public boolean isShooting;
 	
 	
+	/**
+	 * weapons the player has currently equipped
+	 */
 	public Array<Weapon> weapons;
 	
 	/**
@@ -27,13 +32,17 @@ public class Player extends Ship{
 	
 	int max_life=100;
 	
+	
+	// TODO winkel, in dem er jetzt sein sollte
+	public float desAngle;
+	
 	public float money;
 	
 	public Player() {
 		super(Res.atlas.findRegion("ship"));
 		setOrigin(48,48);
 		MAX_SPEED=500;
-		ANGLE_ACC_SPEED=10;
+		ANGLE_ACC_SPEED=15;
 		GameObjects.player=this;
 		
 		mgA=Res.atlas.findRegion("ship_doublegun");
@@ -51,6 +60,20 @@ public class Player extends Ship{
 	@Override
 	public void act(Chunk pChunk,float delta) {
 		super.act(pChunk,delta);
+		
+		// winkel berechnen
+		// turn around in the direction our aim is at
+		float dif=desAngle-angle;
+		if(Math.abs(Utils.differenceAngles(angle,desAngle))<ANGLE_ACC_SPEED*delta){
+			angle=desAngle;
+			accAngle=0;
+			setRotation(MathUtils.radDeg*angle-90); 
+		}else
+		if((dif>0.05f&&dif<MathUtils.PI) || dif <-MathUtils.PI){
+			accAngle=ANGLE_ACC_SPEED;
+		}else{//if((dif<-0.05f&&dif>-MathUtils.PI) || dif>MathUtils.PI){
+			accAngle=-ANGLE_ACC_SPEED;
+		}
 		
 		if(isShooting){
 			
@@ -78,11 +101,12 @@ public class Player extends Ship{
 	}
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
-		
 		drawReg(batch,mgA);
 		drawReg(batch,cockpitA);
 		drawReg(batch,engineA);
+
+		super.draw(batch, parentAlpha);
+		
 	}
 	public void drawReg(SpriteBatch batch,TextureRegion region){
 		float x = getX();

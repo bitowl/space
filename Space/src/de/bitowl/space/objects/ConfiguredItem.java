@@ -40,10 +40,15 @@ public class ConfiguredItem {
 		}
 		return Type.NONE;
 	}
+	/**
+	 * searchs a weapon by name
+	 * @param weapon
+	 * @return
+	 */
 	public static Weapon getWeapon(String weapon){
-		for(int i=0;i<GameObjects.player.weapons.size;i++){
-			if(GameObjects.player.weapons.get(i).name.equals(weapon)){
-				return GameObjects.player.weapons.get(i);
+		for(int i=0;i<Res.weapons.size;i++){
+			if(Res.weapons.get(i).name.equals(weapon)){
+				return Res.weapons.get(i);
 			}
 		}
 		System.err.println("no weapon called "+weapon+" found :(");

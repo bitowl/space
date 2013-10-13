@@ -28,7 +28,7 @@ public class ConfigReader {
 		JsonValue values=reader.parse(Gdx.files.internal("space/weapons.json"));
 		JsonValue weapons=values.get("weapons");
 		
-		GameObjects.player.weapons=new Array<Weapon>(weapons.size);
+		Res.weapons=new Array<ConfiguredWeapon>(weapons.size);
 		
 		for(int i=0;i<weapons.size;i++){
 			
@@ -39,10 +39,11 @@ public class ConfigReader {
 			JsonValue upgrades		= weapons.get(i).get("upgrades");
 			ConfiguredWeapon weapon	= new ConfiguredWeapon(upgrades.get(0)); // let the weapons configure themselves
 			weapon.name				= weapons.get(i).getString("name");
-			GameObjects.player.weapons.add(weapon);
+			Res.weapons.add(weapon);
 		}
 		
-		GameObjects.player.weapon=GameObjects.player.weapons.get(GameObjects.player.currentWeapon);
+		Res.player.weapon=Res.weapons.get(Res.player.currentWeapon);
+		//GameObjects.player.weapon=GameObjects.player.weapons.get(GameObjects.player.currentWeapon);
 		
 		// read enemy
 		JsonValue enemVals	= reader.parse(Gdx.files.internal("space/enemies.json"));

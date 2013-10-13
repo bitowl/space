@@ -13,18 +13,23 @@ import de.bitowl.space.Res;
  *
  */
 public class ConfiguredShot{
-	public enum Type{NORMAL,STEERED,EXPLOSIVE};
+	public enum Type{NORMAL,STEERED,EXPLOSIVE,SINUS};
 	public Type type;
 	
-	public float angle;
+	public float angle; // change in angle
+	
 	public float speed;
 	public float strength;
+	
+	public float posAngle; // where does the shot start relative to the ship
 	
 	public String image;
 	public float animTime;
 	
-	public float maxAccAngle;// only STEERED
-	public float explosionRadius;// only EXPLOSIVE
+	public float maxAccAngle;		// only STEERED
+	public float explosionRadius;	// only EXPLOSIVE
+	public float bulletSpeed;		// only SINUS
+	public float bulletAmplitude;	// only SINUS
 	
 	public Shot create(float pX,float pY,float pAngle){
 		Shot shot;
@@ -37,15 +42,20 @@ public class ConfiguredShot{
 				shot=new ExplosiveShot(Res.atlas.findRegion(image));
 				((ExplosiveShot)shot).radius=explosionRadius;
 				break;
+			case SINUS:
+				shot=new SinusShot(Res.atlas.findRegion(image));
+				((SinusShot)shot).bulletSpeed	  = bulletSpeed;
+				((SinusShot)shot).bulletAmplitude = bulletAmplitude;
+				break;
 			default:
 				shot=new Shot(Res.atlas.findRegion(image));
 			break;
 		}
 		shot.speed=speed;
 		shot.strength=strength;
-		shot.setX(pX-shot.getOriginX()+MathUtils.cos(pAngle+angle)*48); // TODO radius customizable?
-		shot.setY(pY-shot.getOriginY()+MathUtils.sin(pAngle+angle)*48);
-		shot.setAngle(pAngle);
+		shot.setX(pX-shot.getOriginX()+MathUtils.cos(MathUtils.degRad*pAngle+posAngle)*48); // TODO radius customizable?
+		shot.setY(pY-shot.getOriginY()+MathUtils.sin(MathUtils.degRad*pAngle+posAngle)*48);
+		shot.setAngle(pAngle+MathUtils.degRad*angle);
 		if(animTime!=-1){
 			shot.addAction(new AnimAction(new Animation(animTime,Res.atlas.findRegions(image)),true));
 		}
@@ -61,6 +71,8 @@ public class ConfiguredShot{
 				return Type.STEERED;
 			case 2:
 				return Type.EXPLOSIVE;
+			case 3:
+				return Type.SINUS;
 		}
 		return Type.NORMAL;
 	}

@@ -113,8 +113,7 @@ public class IngameScreen extends AbstractScreen{
 		Chunk chunk=new Chunk(0,0);
 		chunks.add(chunk);
 		
-		player=new Player();
-		GameObjects.player=player;
+		player=Res.player;
 		// set player to the center of the world
 		player.setX(-player.getWidth()/2);player.setY(-player.getHeight()/2);
 		player.setRotation(-90);
@@ -136,8 +135,7 @@ public class IngameScreen extends AbstractScreen{
 		switchWeapons=Res.atlas.findRegion("switchWeapons");
 		
 		
-		// read configuration for enemies and weapons
-		ConfigReader.initGameValues();
+
 		
 		marker.add(new Marker(0,0));
 		
@@ -535,7 +533,7 @@ public class IngameScreen extends AbstractScreen{
 					player.MAX_SPEED=player.accSpeed=(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;
 					if(player.MAX_SPEED>500){player.MAX_SPEED=500;}
 					//player.speed=(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;
-					player.angle=MathUtils.atan2((touchPos.y-camera.position.y-originY),(touchPos.x-camera.position.x-originX));
+					player.desAngle=MathUtils.atan2((touchPos.y-camera.position.y-originY),(touchPos.x-camera.position.x-originX));
 				
 					// rotate the player acording to his angle
 					player.setRotation(MathUtils.radDeg*player.angle-90);
@@ -606,7 +604,7 @@ public class IngameScreen extends AbstractScreen{
 				player.MAX_SPEED=player.accSpeed=(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;
 				if(player.MAX_SPEED>500){player.MAX_SPEED=500;}
 				//player.speed=(float)Math.sqrt((touchPos.x-camera.position.x-originX)*(touchPos.x-camera.position.x-originX)+(touchPos.y-camera.position.y-originY)*(touchPos.y-camera.position.y-originY))*SENSITIVITY;
-				player.angle=MathUtils.atan2((touchPos.y-camera.position.y-originY),(touchPos.x-camera.position.x-originX));
+				player.desAngle=MathUtils.atan2((touchPos.y-camera.position.y-originY),(touchPos.x-camera.position.x-originX));
 				
 				// rotate the player acording to his angle
 				player.setRotation(MathUtils.radDeg*player.angle-90);
@@ -658,7 +656,7 @@ public class IngameScreen extends AbstractScreen{
 			if(controls!=ControlScheme.CONTROLLER){
 				return false;
 			}
-			
+			if(Math.abs(value)<0.1){value=0;} // dead zone TODO configurable?
 			
 			
 			if(axisIndex==0){
@@ -669,21 +667,25 @@ public class IngameScreen extends AbstractScreen{
 			
 			
 			if(axisIndex==0 || axisIndex==1){
-			player.accSpeed=80;
-			player.MAX_SPEED=player.accSpeed=(float)Math.sqrt(speedX*speedX+speedY*speedY)*500;//SENSITIVITY; // maximal 500
-			if(player.MAX_SPEED>500){player.MAX_SPEED=500;}
-
-			if(speedY!=0||speedY!=0){
-				player.angle=MathUtils.atan2(speedY,speedX);
-			}
-		
-			// rotate the player acording to his angle
-			player.setRotation(MathUtils.radDeg*player.angle-90);
+				player.accSpeed=80;
+				player.MAX_SPEED=player.accSpeed=(float)Math.sqrt(speedX*speedX+speedY*speedY)*500;//SENSITIVITY; // maximal 500
+				if(player.MAX_SPEED>500){player.MAX_SPEED=500;}
+	
+				if(speedX!=0||speedY!=0){
+					player.desAngle=MathUtils.atan2(speedY,speedX);
+				}else{
+					player.desAngle=player.angle; // should not turn anymore
+					player.MAX_SPEED=0;
+					player.speed=0;
+				}
+			
+				// rotate the player acording to his angle
+				player.setRotation(MathUtils.radDeg*player.angle-90);
 			}
 			
 			
 			if(axisIndex==3){
-				if(Math.abs(value)<0.1){value=0;} // dead zone TODO configurable?
+
 				incZoom=value*3;
 			//	changeZoom(value/6);
 			}

@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
+
+import de.bitowl.space.objects.ConfiguredWeapon;
+import de.bitowl.space.objects.Player;
 
 /**
  * Resources, that are used throughout the game
@@ -28,6 +32,10 @@ public class Res {
 	public static IngameScreen ingame;
 	public static ShopScreen shop;
 	public static GameOverScreen gameover;
+	
+	public static Player player;
+	public static Array<ConfiguredWeapon> weapons;
+	
 	
 	
 	/**
@@ -51,10 +59,19 @@ public class Res {
 		skin=new Skin(Gdx.files.internal("ui/defaultskin.json"));
 		
 		
+		
+		player=new Player();
+		
 		// generate dem screens
 		
 		// TODO maybe it's useful to create a single stage for all menus 
 		ingame=new IngameScreen();
+
+		
+		// read configuration for enemies and weapons
+		ConfigReader.initGameValues();
+		
+		
 		shop=new ShopScreen();
 		gameover=new GameOverScreen();
 		

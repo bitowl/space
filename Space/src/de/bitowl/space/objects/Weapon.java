@@ -1,8 +1,18 @@
 package de.bitowl.space.objects;
 
+import com.badlogic.gdx.utils.Array;
 
+import de.bitowl.space.Res;
 
-public abstract class Weapon {
+/**
+ * a weapon in a certain upgraded state
+ * 
+ * @author bitowl
+ *
+ */
+public class Weapon {
+	
+	
 	public String name;
 	/**
 	 * time to wait between two automatic shots
@@ -19,6 +29,9 @@ public abstract class Weapon {
 	public int maxAmmo;
 	public float minTimeToNextShot;
 	
+	
+	Array<ConfiguredShot> shots;
+	
 	/**
 	 * a shot is given by a certain ship
 	 * @param pTeam ship team
@@ -27,7 +40,7 @@ public abstract class Weapon {
 	 * @param pAngle ship angle
 	 * @param aim 
 	 */
-	public abstract void shoot(int pTeam, float pX,float pY,float pAngle, GameObject aim);
+	//public abstract void shoot(int pTeam, float pX,float pY,float pAngle, GameObject aim);
 	public Weapon(){}
 	public Weapon(float pRecharge, float pMinRecharge,int pMaxAmmo){
 		autoShootDelay=pRecharge;
@@ -122,5 +135,17 @@ public abstract class Weapon {
 			}
 			
 		};*/
+	}
+	public void shoot(int pTeam, float pX,float pY,float pAngle,GameObject pAim) {
+		System.out.println("SHOOT");
+		for(int i=0;i<shots.size;i++){// shoot all our shots :D
+			ammo--;
+			Shot shot=shots.get(i).create(pX,pY,pAngle);
+			if(shot instanceof SteeredShot){ // aim steered shots
+				((SteeredShot)shot).aim=pAim;
+			}
+			shot.team=pTeam;
+			Res.ingame.addShot(shot);
+		}
 	}
 }
