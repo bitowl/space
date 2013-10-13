@@ -17,7 +17,7 @@ public class ConfiguredEnemy {
 	public float maxAccAngle;
 	public float life;
 	public float strength;
-	ConfiguredWeapon weapon;
+	Weapon weapon;
 	public float frequency;
 	
 	@SuppressWarnings("unchecked")
@@ -32,7 +32,7 @@ public class ConfiguredEnemy {
 		strength	= config.getFloat("strength");
 		
 		if(config.get("weapon")!=null){
-			weapon=new ConfiguredWeapon(config.get("weapon"));
+			weapon=ConfiguredWeapon.initUpgrade(config.get("weapon"));//new ConfiguredWeapon(config.get("weapon"));
 		}
 		frequency=config.getFloat("frequency");
 		Res.ingame.totalEnemyFrequency+=frequency;
@@ -57,7 +57,7 @@ public class ConfiguredEnemy {
 		enemy.strength=strength;
 		
 		if(weapon!=null){
-			enemy.weapon=(new ConfiguredWeapon(weapon));
+			enemy.weapon=new Weapon(weapon);
 		}
 		return enemy;
 	}

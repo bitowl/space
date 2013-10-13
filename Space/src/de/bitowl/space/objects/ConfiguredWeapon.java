@@ -23,16 +23,17 @@ public class ConfiguredWeapon{
 		
 		
 		for(int i=0;i<upgradesConfig.size;i++){
-			initUpgrade(upgradesConfig.get(i));
+			upgrades.add(initUpgrade(upgradesConfig.get(i)));
 		}
 		//System.out.println(config);
 		// read the configuration
 	
 	}
 
-	public void initUpgrade(JsonValue config){
+	public static Weapon initUpgrade(JsonValue config){
 		Weapon weapon=new Weapon(); // set up this upgrade level
-		weapon.name=name; // TODO any need to set this?
+		weapon.name="TODO WHO THE HELL NEEDS DIS STUFF?";
+		//weapon.name=name; // TODO any need to set this?
 		
 		weapon.maxAmmo=config.getInt("maxAmmo");
 		weapon.ammo=weapon.maxAmmo; // fill the weapon :) TODO read from savegame
@@ -60,6 +61,8 @@ public class ConfiguredWeapon{
 			
 			weapon.shots.add(shot);
 		}
+		
+		return weapon;
 		
 	}
 	

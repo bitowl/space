@@ -53,8 +53,8 @@ public class ConfiguredShot{
 		}
 		shot.speed=speed;
 		shot.strength=strength;
-		shot.setX(pX-shot.getOriginX()+MathUtils.cos(MathUtils.degRad*pAngle+posAngle)*48); // TODO radius customizable?
-		shot.setY(pY-shot.getOriginY()+MathUtils.sin(MathUtils.degRad*pAngle+posAngle)*48);
+		shot.setX(pX-shot.getOriginX()+MathUtils.cos(pAngle+MathUtils.degRad*posAngle)*48); // TODO radius customizable?
+		shot.setY(pY-shot.getOriginY()+MathUtils.sin(pAngle+MathUtils.degRad*posAngle)*48);
 		shot.setAngle(pAngle+MathUtils.degRad*angle);
 		if(animTime!=-1){
 			shot.addAction(new AnimAction(new Animation(animTime,Res.atlas.findRegions(image)),true));

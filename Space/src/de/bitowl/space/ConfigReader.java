@@ -36,13 +36,13 @@ public class ConfigReader {
 			System.err.println("WEAPON "+i+": "+weapons.get(i).getString("name"));
 			
 			
-			JsonValue upgrades		= weapons.get(i).get("upgrades");
-			ConfiguredWeapon weapon	= new ConfiguredWeapon(upgrades.get(0)); // let the weapons configure themselves
-			weapon.name				= weapons.get(i).getString("name");
+			//JsonValue upgrades		= weapons.get(i).get("upgrades");
+			ConfiguredWeapon weapon	= new ConfiguredWeapon(weapons.get(i)); // let the weapons configure themselves
+			//weapon.name				= weapons.get(i).getString("name");
 			Res.weapons.add(weapon);
 		}
 		
-		Res.player.weapon=Res.weapons.get(Res.player.currentWeapon);
+		Res.player.weapon=Res.weapons.get(Res.player.currentWeapon).getCurrent();
 		//GameObjects.player.weapon=GameObjects.player.weapons.get(GameObjects.player.currentWeapon);
 		
 		// read enemy

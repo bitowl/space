@@ -48,7 +48,7 @@ public class ConfiguredItem {
 	public static Weapon getWeapon(String weapon){
 		for(int i=0;i<Res.weapons.size;i++){
 			if(Res.weapons.get(i).name.equals(weapon)){
-				return Res.weapons.get(i);
+				return Res.weapons.get(i).getCurrent();
 			}
 		}
 		System.err.println("no weapon called "+weapon+" found :(");

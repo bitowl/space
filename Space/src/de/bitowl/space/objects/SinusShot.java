@@ -27,7 +27,7 @@ public class SinusShot extends Shot{
 	
 	public SinusShot(AtlasRegion pRegion) {
 		super(pRegion);
-		time=MathUtils.PI/2;
+		//time=MathUtils.PI/4;
 	
 	}
 	@Override

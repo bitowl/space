@@ -34,6 +34,7 @@ public class Weapon {
 	
 	/**
 	 * a shot is given by a certain ship
+	 * @param weapon 
 	 * @param pTeam ship team
 	 * @param pX ship position
 	 * @param pY ship position
@@ -41,13 +42,25 @@ public class Weapon {
 	 * @param aim 
 	 */
 	//public abstract void shoot(int pTeam, float pX,float pY,float pAngle, GameObject aim);
-	public Weapon(){}
+	public Weapon() {}
+	/**
+	 * copys this weapon (e.g. for a new enemy)
+	 * @param w
+	 */
+	public Weapon(Weapon w){
+		maxAmmo=w.maxAmmo;
+		ammo=w.ammo;
+		autoShootDelay=w.autoShootDelay;
+		manualDelay=w.manualDelay;
+		shots=w.shots;
+	}
 	public Weapon(float pRecharge, float pMinRecharge,int pMaxAmmo){
 		autoShootDelay=pRecharge;
 		manualDelay=pMinRecharge;
 		maxAmmo=pMaxAmmo;
 		ammo=maxAmmo;// at the beginning the weapon is fully charged
 	}
+	
 	
 	public void addAmmo(int pAmount){
 		ammo+=pAmount;

@@ -5,7 +5,7 @@
 		"upgrades": [
 		{
 				"shipimage": null,
-				"maxAmmo": 100,
+				"maxAmmo": -1,
 				"autoShootDelay": 0.1,
 				"manualDelay": 0.06,
 				"shots": [
@@ -15,7 +15,7 @@
 						"speed": 800,
 						"strength": 1,
 						"image": "shot",
-						"bSpeed":50,
+						"bSpeed":10,
 						"bAmplitude":100
 					}
 				]
