@@ -151,6 +151,10 @@ public class IngameScreen extends AbstractScreen{
 	@Override
 	public void hide() {
 		// TODO remove controller listener
+		
+		// save zoom
+		Preferences.putFloat("gameZoom", gameZoom);
+		Preferences.flush();
 	}
 	/**
 	 * we could land on this planet in this frame
@@ -642,6 +646,7 @@ public class IngameScreen extends AbstractScreen{
 	/*	Preferences.putFloat("gameZoom", gameZoom);
 		Preferences.flush();*/
 	}
+	
 	
 	
 	// controll via controller

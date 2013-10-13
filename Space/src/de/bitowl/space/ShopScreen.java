@@ -21,6 +21,8 @@ import de.bitowl.space.objects.Weapon;
 public class ShopScreen implements Screen {
 	Stage stage;
 	
+	Label moneyLabel;
+	Array<Label> weaponPrices;
 	Array<TextButton> weaponButtons;
 	
 	public ShopScreen() {
@@ -44,9 +46,13 @@ public class ShopScreen implements Screen {
 		table.add(back).pad(5);
 		
 		Label title=new Label("Shop", Res.skin,"title");
-		table.add(title).expandX().align(Align.center).colspan(3).row();
+		table.add(title).expandX().align(Align.center).colspan(2);
+		
+		moneyLabel=new Label("money",Res.skin);
+		table.add(moneyLabel).row();
 		
 		weaponButtons=new Array<TextButton>();
+		weaponPrices=new Array<Label>();
 		
 		for(int i=0;i<Res.weapons.size;i++){
 			ConfiguredWeapon weapon=Res.weapons.get(i);
@@ -59,25 +65,17 @@ public class ShopScreen implements Screen {
 			table.add(desc).expandX().fill();
 			
 			
-			// get the next possible upgrade
-			if(weapon.bought<weapon.upgrades.size){
-				Weapon nextOne=weapon.upgrades.get(weapon.bought);
+			Label price=new Label("TODO",Res.skin);
+			weaponPrices.add(price);
+			table.add(price).padLeft(5);
 			
-				Label price=new Label(nextOne.price+"",Res.skin);
-				table.add(price).padLeft(10);
+			TextButton upgrade=new TextButton("TODO", Res.skin);
+			upgrade.addListener(new BuyListener(i));
 			
-				TextButton upgrade=new TextButton("TODO", Res.skin);
-				weaponButtons.add(upgrade);
-				
-				table.add(upgrade).pad(5).row();
-			}else{
-				table.add();
-				TextButton finished=new TextButton("fully upgraded",Res.skin,"default-disabled");
-				finished.setDisabled(true);
-				weaponButtons.add(finished);
-				table.add(finished).row();
-				
-			}
+			weaponButtons.add(upgrade);
+			
+			
+			table.add(upgrade).pad(5).row();
 			
 			
 		}
@@ -98,14 +96,18 @@ public class ShopScreen implements Screen {
 	 * updates the "upgrade"-Buttons concerning how much money you have
 	 */
 	public void updateButtons(){
+		moneyLabel.setText("money: "+Res.player.money);
+		
 		for(int i=0;i<Res.weapons.size;i++){
 			ConfiguredWeapon weapon=Res.weapons.get(i);
 			if(weapon.bought<weapon.upgrades.size){// weapon can be upgraded
 				Weapon nextOne=weapon.upgrades.get(weapon.bought);
 			
+				weaponPrices.get(i).setText(nextOne.price+"");
+				
 				System.out.println("you have "+Res.player.money+" million dollarZ!");
 				if(nextOne.price>Res.player.money){
-					weaponButtons.get(i).setText("not enough money");
+					weaponButtons.get(i).setText("not enough\n money");
 					weaponButtons.get(i).setDisabled(true);
 					weaponButtons.get(i).setStyle(Res.skin.get("default-disabled", TextButtonStyle.class));
 				}else{
@@ -117,6 +119,12 @@ public class ShopScreen implements Screen {
 					weaponButtons.get(i).setDisabled(false);
 					weaponButtons.get(i).setStyle(Res.skin.get("default", TextButtonStyle.class));
 				}
+			}else{
+				weaponPrices.get(i).setText("");
+				
+				weaponButtons.get(i).setText("fully\nupgraded");
+				weaponButtons.get(i).setDisabled(true);
+				weaponButtons.get(i).setStyle(Res.skin.get("default-disabled", TextButtonStyle.class));
 			}
 		}
 	}
@@ -166,7 +174,30 @@ public class ShopScreen implements Screen {
 	@Override
 	public void dispose() {
 		stage.dispose();
-		
 	}
 
+	
+	
+	class BuyListener extends ClickListener{
+		int weaponId; // which weapon this button buys
+		public BuyListener(int pWeapon){
+			weaponId=pWeapon;
+		}
+		
+		@Override
+		public void clicked(InputEvent event, float x, float y) {
+			ConfiguredWeapon weapon=Res.weapons.get(weaponId);
+			
+			if(weapon.bought>=weapon.upgrades.size){return;} // no more upgrades to buy for this one
+			Weapon nextOne=weapon.upgrades.get(weapon.bought);
+			
+			// TODO maybe check if he has enough moneeyyzzzZZz
+			// should not be neccessary as the button is then disabled
+			Res.player.money-=nextOne.price;
+			
+			weapon.bought++;
+			
+			updateButtons();
+		}
+	}
 }
