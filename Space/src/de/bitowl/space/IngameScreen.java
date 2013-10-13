@@ -138,7 +138,7 @@ public class IngameScreen extends AbstractScreen{
 
 		
 		marker.add(new Marker(0,0));
-		
+		Controllers.addListener(new ControllerControlls()); // TODO only when screen visib?
 	}
 	
 	
@@ -146,7 +146,10 @@ public class IngameScreen extends AbstractScreen{
 		GameInputProcessor inputProcessor=new GameInputProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
 		System.out.println(Controllers.getControllers().size+":O");
-		Controllers.addListener(new ControllerControlls());
+		
+		// weapon of player might has changed while in shop
+		player.weapon=Res.weapons.get(player.currentWeapon).getCurrent();
+		
 	}
 	@Override
 	public void hide() {
