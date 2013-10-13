@@ -42,7 +42,12 @@ public class ConfigReader {
 			Res.weapons.add(weapon);
 		}
 		
+		// first weapon HAS TO BE BOUGHT
+				Res.weapons.get(Res.player.currentWeapon).bought=1;
 		Res.player.weapon=Res.weapons.get(Res.player.currentWeapon).upgrades.get(0);
+		
+		
+		
 		//GameObjects.player.weapon=GameObjects.player.weapons.get(GameObjects.player.currentWeapon);
 		
 		// read enemy

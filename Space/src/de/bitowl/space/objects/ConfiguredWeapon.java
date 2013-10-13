@@ -14,6 +14,7 @@ public class ConfiguredWeapon{
 	public String name;
 	public Array<Weapon> upgrades;
 	public int bought=0; // which upgrade has the player bought
+	// TODO -1: not bought instead of 0  --- might make things easier
 	
 	public ConfiguredWeapon(JsonValue config) {
 		name=config.getString("name");
@@ -77,7 +78,7 @@ public class ConfiguredWeapon{
 	}*/
 
 	public Weapon getCurrent(){
-		if(bought==0||bought>=upgrades.size){
+		if(bought==0||bought>upgrades.size){
 			return null;
 		}
 		return upgrades.get(bought-1);

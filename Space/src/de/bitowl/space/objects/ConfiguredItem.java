@@ -10,7 +10,7 @@ import de.bitowl.space.objects.Item.Type;
 public class ConfiguredItem {
 	Item.Type type;
 	float amount;
-	Weapon weapon;// only for LIFE
+	String weapon;// only for LIFE
 	AtlasRegion image;
 	float frequency;
 	
@@ -19,10 +19,12 @@ public class ConfiguredItem {
 
 		frequency=config.getFloat("frequency");
 		Res.ingame.totalItemFrequency+=frequency;
+		
+		System.out.println("config item");
 		if(type!=Type.NONE){
 			amount=config.getFloat("amount");
 			if(type==Type.AMMO){
-				weapon=getWeapon(config.getString("weapon"));
+				weapon=config.getString("weapon");//getWeapon(config.getString("weapon"));
 			}
 			image=Res.atlas.findRegion(config.getString("image"));
 		}
@@ -46,8 +48,10 @@ public class ConfiguredItem {
 	 * @return
 	 */
 	public static Weapon getWeapon(String weapon){
+		System.out.println("----"+weapon+"---- "+Res.weapons.size);
 		for(int i=0;i<Res.weapons.size;i++){
 			if(Res.weapons.get(i).name.equals(weapon)){
+				System.err.println("---- found at "+i);
 				return Res.weapons.get(i).getCurrent();
 			}
 		}
@@ -61,7 +65,16 @@ public class ConfiguredItem {
 		item.setY(pY-item.getOriginY());
 		item.type=type;
 		item.amount=amount;
-		item.weapon=weapon;
+		if(weapon!=null){
+			item.weapon=getWeapon(weapon);
+			if(item.weapon==null){
+				item.type=Type.NONE;
+				item.setDrawable(null);
+				//return null; // we don't own this weapon yet :/
+			}
+		}
+		
+		System.out.println(type+":"+amount+"-"+weapon);
 		return item;
 	}
 }

@@ -18,7 +18,7 @@ public class Player extends Ship{
 	/**
 	 * weapons the player has currently equipped
 	 */
-	public Array<Weapon> weapons;
+//	public Array<Weapon> weapons;
 	
 	/**
 	 * the weapon currently equipped
@@ -125,12 +125,24 @@ public class Player extends Ship{
 		}
 	}
 	public void switchWeapon(){
-		currentWeapon++;
-		if(currentWeapon==weapons.size){
-			currentWeapon=0;
-		}
-		weapon=weapons.get(currentWeapon);
-
+		System.out.println("switchWeapon!!");
+		do{
+			currentWeapon++;
+			
+			if(currentWeapon==Res.weapons.size){
+				currentWeapon=0;
+			}
+			
+			System.out.println("switch to: "+currentWeapon+" - "+Res.weapons.get(currentWeapon).name);
+			
+			weapon=Res.weapons.get(currentWeapon).getCurrent();
+			// System.out.println(weapon);
+			
+		/*if(weapon==null){
+			switchWeapon();
+		}*/
+		}while(weapon==null);// in case we have not bought one of the weapons yet ;)
+		//System.err.println("---");
 	}
 
 	public void addMoney(float amount) {

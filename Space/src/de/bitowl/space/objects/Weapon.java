@@ -152,7 +152,7 @@ public class Weapon {
 		};*/
 	}
 	public void shoot(int pTeam, float pX,float pY,float pAngle,GameObject pAim) {
-		System.out.println("SHOOT");
+		//System.out.println("SHOOT");
 		for(int i=0;i<shots.size;i++){// shoot all our shots :D
 			ammo--;
 			Shot shot=shots.get(i).create(pX,pY,pAngle);

@@ -387,12 +387,12 @@ public class IngameScreen extends AbstractScreen{
 				//System.out.println(x+"..."+y);
 				i++;
 				if(getChunk(x,y)==null){
-					System.err.println("------------------");
+			//		System.err.println("------------------");
 					addChunkFor(x,y);
 				}
 			}
 		}
-		System.out.println(i+" Chunks checked.");
+//		System.out.println(i+" Chunks checked.");
 		
 		
 		// can we remove an old chunk?
@@ -421,7 +421,7 @@ public class IngameScreen extends AbstractScreen{
 	
 	
 	public void addShot(Shot shot){
-		System.out.println(shot.getX()+"-"+shot.getY());
+		// System.out.println(shot.getX()+"-"+shot.getY());
 		Chunk chunk=getChunk(shot.getX(),shot.getY());
 		if(chunk!=null){
 			chunk.shots.add(shot);
